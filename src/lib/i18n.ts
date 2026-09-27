@@ -17,9 +17,10 @@ export const translations = {
     clue: "Clue",
     tapToReveal: "Tap to reveal",
     tapToHide: "Tap to hide",
-    tapToSeeDefinition: "Tap card to see definition",
+    tapToSeeBack: "Tap card to flip",
     tapToFlip: "Tap to flip",
     definition: "Definition",
+    translation: "Translation",
     example: "Example",
 
     // Controls
@@ -74,9 +75,10 @@ export const translations = {
     clue: "Pista",
     tapToReveal: "Toca para ver",
     tapToHide: "Toca para ocultar",
-    tapToSeeDefinition: "Toca la tarjeta para ver definición",
+    tapToSeeBack: "Toca la tarjeta para voltear",
     tapToFlip: "Toca para voltear",
     definition: "Definición",
+    translation: "Traducción",
     example: "Ejemplo",
 
     // Controls
