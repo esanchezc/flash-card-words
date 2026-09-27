@@ -19,5 +19,7 @@ Directly models physical handwritten 3x5 index cards:
 
 ## Current State
 - Next.js 15+ initialized with TypeScript, Tailwind CSS v4, Lucide icons, PapaParse, and Canvas Confetti.
-- Initialized Git repository on `main` branch.
+- Initialized Git repository on `main` branch (commits `a229be8` and `9debff0`).
 - Pre-populated `words.csv` and `public/words.csv` with `Set 1` containing 10 words, translations, notes, definitions, and examples.
+- Client-side English/Spanish localization toggle (`src/lib/i18n.ts`) persisted in `localStorage`.
+- Streamlined card front: removed redundant "English Vocabulary" label and renamed clue button to concise "Clue" / "Pista".
