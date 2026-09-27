@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Flash Card Words - English Vocabulary",
   description: "Digital index cards for memorizing English vocabulary in focused 10-word sets.",
+  manifest: "/manifest.json",
+  icons: {
+    icon: "/favicon-32x32.png",
+    apple: "/apple-touch-icon.png",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
