@@ -23,3 +23,4 @@ Directly models physical handwritten 3x5 index cards:
 - Pre-populated `words.csv` and `public/words.csv` with `Set 1` containing 10 words, translations, notes, definitions, and examples.
 - Client-side English/Spanish localization toggle (`src/lib/i18n.ts`) persisted in `localStorage`.
 - Streamlined card front: removed redundant "English Vocabulary" label and renamed clue button to concise "Clue" / "Pista".
+- Fully configured Progressive Web App (PWA) with `manifest.json`, Apple touch icon (`public/apple-touch-icon.png`), and Android maskable icons (192px and 512px).
