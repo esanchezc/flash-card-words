@@ -4,6 +4,8 @@ import React, { useEffect } from "react";
 import confetti from "canvas-confetti";
 import { RotateCw, Star, Layers, CheckCircle2 } from "lucide-react";
 import { FlashCard } from "@/types/card";
+import { Language, translations } from "@/lib/i18n";
+import { GLOBAL_POOL_BUCKET } from "@/hooks/useDeck";
 
 interface SessionCompleteProps {
   bucketName: string;
@@ -12,6 +14,7 @@ interface SessionCompleteProps {
   onPracticeStarred: () => void;
   onSelectAnotherBucket: () => void;
   starredCount: number;
+  language: Language;
 }
 
 export const SessionComplete: React.FC<SessionCompleteProps> = ({
@@ -21,9 +24,11 @@ export const SessionComplete: React.FC<SessionCompleteProps> = ({
   onPracticeStarred,
   onSelectAnotherBucket,
   starredCount,
+  language,
 }) => {
+  const t = translations[language];
+
   useEffect(() => {
-    // Confetti celebration
     try {
       confetti({
         particleCount: 80,
@@ -42,14 +47,14 @@ export const SessionComplete: React.FC<SessionCompleteProps> = ({
       </div>
 
       <span className="text-xs font-bold text-sky-600 uppercase tracking-widest px-3 py-1 bg-sky-50 rounded-full mb-2">
-        {bucketName === "__GLOBAL_POOL__" ? "Global Pool" : bucketName}
+        {bucketName === GLOBAL_POOL_BUCKET ? t.globalPool : bucketName}
       </span>
 
       <h2 className="text-2xl font-black text-slate-900 tracking-tight mb-1">
-        Bucket Completed!
+        {t.bucketCompleted}
       </h2>
       <p className="text-xs sm:text-sm text-slate-500 mb-6">
-        You successfully memorized all {cards.length} words in this set.
+        {t.masteredSubtitle(cards.length)}
       </p>
 
       {/* Mini word summary */}
@@ -70,30 +75,30 @@ export const SessionComplete: React.FC<SessionCompleteProps> = ({
         <button
           type="button"
           onClick={onRestart}
-          className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm rounded-2xl shadow-md active:scale-95 transition-all"
+          className="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm rounded-2xl shadow-md active:scale-95 transition-all cursor-pointer"
         >
           <RotateCw className="w-4 h-4" />
-          <span>Practice This Set Again</span>
+          <span>{t.practiceAgain}</span>
         </button>
 
         {starredCount > 0 && (
           <button
             type="button"
             onClick={onPracticeStarred}
-            className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 font-bold text-sm rounded-2xl active:scale-95 transition-all"
+            className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-amber-50 hover:bg-amber-100 border border-amber-200 text-amber-800 font-bold text-sm rounded-2xl active:scale-95 transition-all cursor-pointer"
           >
             <Star className="w-4 h-4 fill-amber-400 text-amber-500" />
-            <span>Review Starred Words ({starredCount})</span>
+            <span>{t.reviewStarred(starredCount)}</span>
           </button>
         )}
 
         <button
           type="button"
           onClick={onSelectAnotherBucket}
-          className="w-full flex items-center justify-center gap-2 py-2.5 px-4 text-slate-600 hover:bg-slate-100 font-semibold text-xs rounded-xl transition-all"
+          className="w-full flex items-center justify-center gap-2 py-2.5 px-4 text-slate-600 hover:bg-slate-100 font-semibold text-xs rounded-xl transition-all cursor-pointer"
         >
           <Layers className="w-3.5 h-3.5 text-slate-400" />
-          <span>Choose Another Bucket</span>
+          <span>{t.chooseAnotherBucket}</span>
         </button>
       </div>
     </div>

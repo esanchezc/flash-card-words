@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDeck } from "@/hooks/useDeck";
 import { Header } from "@/components/Header";
 import { ProgressBar } from "@/components/ProgressBar";
@@ -9,6 +9,8 @@ import { DeckControls } from "@/components/DeckControls";
 import { NewBucketModal } from "@/components/NewBucketModal";
 import { SessionComplete } from "@/components/SessionComplete";
 import { Loader2, Plus, Sparkles } from "lucide-react";
+import { Language, translations } from "@/lib/i18n";
+import { getStoredLanguage, saveStoredLanguage } from "@/lib/storage";
 
 export default function Home() {
   const {
@@ -36,6 +38,25 @@ export default function Home() {
   } = useDeck();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [language, setLanguage] = useState<Language>("en");
+
+  // Load language preference from storage on mount
+  useEffect(() => {
+    const saved = getStoredLanguage();
+    if (saved) {
+      setLanguage(saved);
+    }
+  }, []);
+
+  const handleToggleLanguage = () => {
+    setLanguage((prev) => {
+      const next: Language = prev === "en" ? "es" : "en";
+      saveStoredLanguage(next);
+      return next;
+    });
+  };
+
+  const t = translations[language];
 
   // Trigger CSV file download
   const handleExportCSV = () => {
@@ -71,6 +92,8 @@ export default function Home() {
           onExportCSV={handleExportCSV}
           onShuffle={shuffleQueue}
           totalCardsInBucket={totalCardsInBucket}
+          language={language}
+          onToggleLanguage={handleToggleLanguage}
         />
 
         {/* Progress Bar (hidden if loading or session complete) */}
@@ -80,6 +103,7 @@ export default function Home() {
             totalCards={totalCardsInBucket}
             masteredCount={masteredCount}
             bucketName={activeBucket}
+            language={language}
           />
         )}
       </div>
@@ -89,7 +113,7 @@ export default function Home() {
         {isLoading ? (
           <div className="flex flex-col items-center justify-center gap-3 text-slate-400">
             <Loader2 className="w-8 h-8 animate-spin text-sky-500" />
-            <span className="text-xs font-semibold">Loading vocabulary cards...</span>
+            <span className="text-xs font-semibold">{t.loadingCards}</span>
           </div>
         ) : isComplete ? (
           <SessionComplete
@@ -99,6 +123,7 @@ export default function Home() {
             onPracticeStarred={practiceStarredOnly}
             onSelectAnotherBucket={() => setIsModalOpen(true)}
             starredCount={starredCountInBucket}
+            language={language}
           />
         ) : currentCard ? (
           <FlashCard
@@ -108,21 +133,22 @@ export default function Home() {
             onToggleStar={toggleStar}
             currentIndex={currentIndex}
             totalInQueue={queue.length}
+            language={language}
           />
         ) : (
-          <div className="text-center p-6 bg-white rounded-3xl border border-slate-200 shadow-sm max-w-xs">
+          <div className="text-center p-6 bg-white rounded-3xl border border-slate-200 shadow-xs max-w-xs">
             <Sparkles className="w-8 h-8 text-sky-500 mx-auto mb-2" />
-            <h3 className="font-bold text-slate-800 text-sm mb-1">No words in this bucket</h3>
+            <h3 className="font-bold text-slate-800 text-sm mb-1">{t.noWordsInBucket}</h3>
             <p className="text-xs text-slate-500 mb-4">
-              Add words or create a new 10-word bucket to start practicing.
+              {t.noWordsSubtitle}
             </p>
             <button
               type="button"
               onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-1.5 px-4 py-2 bg-sky-600 text-white rounded-xl text-xs font-bold"
+              className="inline-flex items-center gap-1.5 px-4 py-2 bg-sky-600 text-white rounded-xl text-xs font-bold cursor-pointer"
             >
               <Plus className="w-4 h-4" />
-              <span>Add Words</span>
+              <span>{t.addWords}</span>
             </button>
           </div>
         )}
@@ -135,6 +161,7 @@ export default function Home() {
             onNeedsPractice={markNeedsPractice}
             onGotIt={markGotIt}
             onFlip={toggleFlip}
+            language={language}
           />
         )}
       </div>
@@ -145,6 +172,7 @@ export default function Home() {
         onClose={() => setIsModalOpen(false)}
         onCreateBucket={addNewBucket}
         existingBuckets={buckets}
+        language={language}
       />
     </div>
   );

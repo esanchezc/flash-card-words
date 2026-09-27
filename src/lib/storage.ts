@@ -5,6 +5,7 @@ const STORAGE_KEYS = {
   STARRED_IDS: "flashcards_starred_ids",
   ACTIVE_BUCKET: "flashcards_active_bucket",
   MASTERED_IDS: "flashcards_mastered_ids",
+  LANGUAGE: "flashcards_language",
 };
 
 export function getStoredCustomCards(): FlashCard[] {
@@ -62,5 +63,24 @@ export function saveStoredActiveBucket(bucket: string): void {
     localStorage.setItem(STORAGE_KEYS.ACTIVE_BUCKET, bucket);
   } catch (e) {
     console.error("Failed to save active bucket to localStorage", e);
+  }
+}
+
+export function getStoredLanguage(): "en" | "es" | null {
+  if (typeof window === "undefined") return null;
+  try {
+    const lang = localStorage.getItem(STORAGE_KEYS.LANGUAGE);
+    return lang === "en" || lang === "es" ? lang : null;
+  } catch (e) {
+    return null;
+  }
+}
+
+export function saveStoredLanguage(lang: "en" | "es"): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(STORAGE_KEYS.LANGUAGE, lang);
+  } catch (e) {
+    console.error("Failed to save language to localStorage", e);
   }
 }

@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { X, Plus, Sparkles, FileText } from "lucide-react";
 import { FlashCard } from "@/types/card";
 import Papa from "papaparse";
+import { Language, translations } from "@/lib/i18n";
 
 interface NewBucketModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ interface NewBucketModalProps {
     cards: Omit<FlashCard, "id" | "bucket">[]
   ) => void;
   existingBuckets: string[];
+  language: Language;
 }
 
 export const NewBucketModal: React.FC<NewBucketModalProps> = ({
@@ -20,7 +22,9 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
   onClose,
   onCreateBucket,
   existingBuckets,
+  language,
 }) => {
+  const t = translations[language];
   const defaultBucketName = `Set ${existingBuckets.length + 1}`;
   const [bucketName, setBucketName] = useState(defaultBucketName);
   const [pasteText, setPasteText] = useState("");
@@ -34,12 +38,12 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
 
     const trimmedBucket = bucketName.trim();
     if (!trimmedBucket) {
-      setError("Please enter a bucket name (e.g. Week 2, Module 1).");
+      setError(t.enterBucketNameError);
       return;
     }
 
     if (!pasteText.trim()) {
-      setError("Please paste or enter at least one word.");
+      setError(t.pasteAtLeastOneError);
       return;
     }
 
@@ -69,7 +73,6 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
         let example = "";
 
         if (row.length === 1) {
-          // Just the word
           word = row[0];
         } else if (row.length === 2) {
           word = row[0];
@@ -84,7 +87,6 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
           notes = row[2];
           definition = row[3];
         } else {
-          // If 5+ columns, check if row[0] is bucket name
           if (row.length >= 6) {
             word = row[1];
             translation = row[2];
@@ -105,7 +107,7 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
             word: word.trim(),
             translation: translation.trim(),
             notes: notes.trim(),
-            definition: definition.trim() || "No definition provided.",
+            definition: definition.trim() || (language === "es" ? "Sin definición." : "No definition provided."),
             example: example.trim(),
             mastered: false,
             starred: false,
@@ -114,7 +116,7 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
       }
 
       if (cards.length === 0) {
-        setError("Could not extract any words. Please check your text format.");
+        setError(t.couldNotExtractError);
         return;
       }
 
@@ -122,7 +124,7 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
       onClose();
     } catch (err) {
       console.error(err);
-      setError("Failed to parse words text. Check format.");
+      setError(t.couldNotExtractError);
     }
   };
 
@@ -134,16 +136,16 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
           <div>
             <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
               <Sparkles className="w-5 h-5 text-sky-500" />
-              Create New Bucket
+              {t.createNewBucket}
             </h2>
             <p className="text-xs text-slate-500">
-              Group a new set of words (e.g. 10 words for this week)
+              {t.modalSubtitle}
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors"
+            className="p-1.5 rounded-full hover:bg-slate-100 text-slate-400 hover:text-slate-600 transition-colors cursor-pointer"
           >
             <X className="w-5 h-5" />
           </button>
@@ -159,13 +161,13 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
 
           <div>
             <label className="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">
-              Bucket / Group Name
+              {t.bucketNameLabel}
             </label>
             <input
               type="text"
               value={bucketName}
               onChange={(e) => setBucketName(e.target.value)}
-              placeholder="e.g. Week 2, Module 3, Medical Set"
+              placeholder={t.bucketNamePlaceholder}
               className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white"
               required
             />
@@ -175,21 +177,21 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
                 <FileText className="w-3.5 h-3.5 text-slate-400" />
-                Paste Word List (CSV or Line by Line)
+                {t.pasteLabel}
               </label>
-              <span className="text-[11px] text-slate-400">Usually 10 words</span>
+              <span className="text-[11px] text-slate-400">{t.usually10Words}</span>
             </div>
 
             <textarea
               value={pasteText}
               onChange={(e) => setPasteText(e.target.value)}
-              placeholder={`Example format:\nword, "translation", "definition"\n\nOr full CSV:\nresilient, "resiliente", "fuerte", "Able to withstand or recover quickly", "She was resilient in the face of difficulties."`}
+              placeholder={t.pastePlaceholder}
               rows={8}
               className="w-full flex-1 px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono text-slate-800 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-500 focus:bg-white resize-none"
               required
             />
             <p className="text-[11px] text-slate-400 mt-1">
-              Supports: <code>word, translation, definition</code> or simple comma/line-separated entries.
+              {t.formatHelp}
             </p>
           </div>
 
@@ -198,16 +200,16 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors"
+              className="px-4 py-2.5 text-xs font-semibold text-slate-600 hover:bg-slate-100 rounded-xl transition-colors cursor-pointer"
             >
-              Cancel
+              {t.cancel}
             </button>
             <button
               type="submit"
-              className="flex items-center gap-1.5 px-5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md active:scale-95 transition-all"
+              className="flex items-center gap-1.5 px-5 py-2.5 bg-sky-600 hover:bg-sky-700 text-white rounded-xl text-xs font-bold shadow-md active:scale-95 transition-all cursor-pointer"
             >
               <Plus className="w-4 h-4" />
-              <span>Create & Study Bucket</span>
+              <span>{t.createAndStudy}</span>
             </button>
           </div>
         </form>
