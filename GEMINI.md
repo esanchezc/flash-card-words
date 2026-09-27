@@ -3,8 +3,8 @@
 ## Project Overview
 A lightweight, mobile-first, iPhone-optimized English vocabulary flashcard application.
 Directly models physical handwritten 3x5 index cards:
-- **Front:** Target English word (bold marker accent), peekable Spanish translation/notes (*Debilidad física*, `*` *discapacidad*).
-- **Back:** English definition and example sentence (*A physical weakness or defect; ailment*).
+- **Front:** Target English word (bold marker accent), peekable Clue button revealing the English definition (*A physical weakness or defect; ailment*).
+- **Back:** Spanish translation (*Debilidad física*, `*` *discapacidad*), definition, and example sentence.
 
 ## Key Features & Constraints
 1. **Buckets & Focus:** Words are grouped into 10-word sets (e.g. `Set 1`, `Week 20`, `Module 1`) to allow the student to focus on their active study set, with a global pool option.
