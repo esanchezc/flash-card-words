@@ -49,11 +49,11 @@ export const FlashCard: React.FC<FlashCardProps> = ({
     const correctText = card.translation;
     const excludeList = [correctText, card.word, ...(card.notes ? [card.notes] : [])];
     
-    // Pick distractor from external pool or other cards
-    const distractorText = getRandomDistractor([
-      ...excludeList,
-      ...otherTranslations.filter((t) => t.toLowerCase() !== correctText.toLowerCase()),
-    ]);
+    // Pick distractor from blended pool (curated list + actual deck translations)
+    const distractorText = getRandomDistractor(
+      excludeList,
+      otherTranslations
+    );
 
     const options: QuizOption[] = [
       { text: correctText, isCorrect: true },
@@ -141,7 +141,7 @@ export const FlashCard: React.FC<FlashCardProps> = ({
                 type="button"
                 onClick={handleStarClick}
                 className="p-1.5 rounded-full hover:bg-slate-100 active:scale-90 transition-transform cursor-pointer"
-                title={card.starred ? "Remove star" : "Star word"}
+                title={card.starred ? t.removeStar : t.starWord}
               >
                 <Star
                   className={`w-5 h-5 transition-colors ${
@@ -255,6 +255,7 @@ export const FlashCard: React.FC<FlashCardProps> = ({
               type="button"
               onClick={handleStarClick}
               className="p-1.5 rounded-full hover:bg-slate-100 active:scale-90 transition-transform cursor-pointer"
+              title={card.starred ? t.removeStar : t.starWord}
             >
               <Star
                 className={`w-5 h-5 transition-colors ${

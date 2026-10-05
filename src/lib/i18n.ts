@@ -26,6 +26,8 @@ export const translations = {
     continueBtn: "Continue →",
     reviewAnswer: "Incorrect — Review Answer",
     correct: "Correct!",
+    starWord: "Star word",
+    removeStar: "Remove star",
 
     // Controls
     needsWork: "Needs Work",
@@ -112,6 +114,8 @@ export const translations = {
     continueBtn: "Continuar →",
     reviewAnswer: "Incorrecto — Repasar Respuesta",
     correct: "¡Correcto!",
+    starWord: "Destacar palabra",
+    removeStar: "Quitar estrella",
 
     // Controls
     needsWork: "Repasar",

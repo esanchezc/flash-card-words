@@ -82,13 +82,28 @@ export const SPANISH_DISTRACTORS: string[] = [
   "desolado",
 ];
 
-export function getRandomDistractor(excludeWords: string[]): string {
+export function getRandomDistractor(
+  excludeWords: string[],
+  actualPool: string[] = []
+): string {
   const normalizedExclude = excludeWords.map((w) =>
     w.toLowerCase().trim()
   );
 
-  const available = SPANISH_DISTRACTORS.filter(
-    (w) => !normalizedExclude.some((ex) => ex.includes(w.toLowerCase()) || w.toLowerCase().includes(ex))
+  // Combine curated distractors with words from the actual deck pool
+  const combinedCandidates = Array.from(
+    new Set([
+      ...SPANISH_DISTRACTORS,
+      ...actualPool.map((w) => w.trim()).filter((w) => w.length > 0),
+    ])
+  );
+
+  const available = combinedCandidates.filter(
+    (w) =>
+      !normalizedExclude.some(
+        (ex) =>
+          ex.includes(w.toLowerCase()) || w.toLowerCase().includes(ex)
+      )
   );
 
   if (available.length === 0) return "diferente";
