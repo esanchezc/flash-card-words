@@ -27,5 +27,5 @@ Directly models physical handwritten 3x5 index cards:
 - Fully configured Progressive Web App (PWA) with `manifest.json`, Apple touch icon (`public/apple-touch-icon.png`), and Android maskable icons (192px and 512px).
 - Quiz-Style Mode implemented locally: 2 Spanish choices inside the card, green success animation on correct answer, auto-flip to definition on mistake, blended distractor pool (`src/data/distractors.ts`), removal of redundant bottom buttons, and single-synonym selection for multi-word translations to prevent giveaway commas.
 - Pre-populated `Set 2` (10 words from textbook: arbitrary, mercenary, allusion, syndrome, euphemism, appease, banal, taint, assail, altruistic) in `words.csv` and `public/words.csv`.
-- Deployed live to Vercel: https://temporary-rushing-silicon-msiqw0l.vercel.app (awaiting user approval to deploy latest quiz changes).
+- Deployed live to Vercel: https://temporary-prompt-valley-876gcho.vercel.app (Claim URL: https://vercel.com/claim-deployment?code=f8fa621c-f10f-4c0f-8726-cd071a44a5e8).
 
