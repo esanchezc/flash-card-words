@@ -25,6 +25,7 @@ Directly models physical handwritten 3x5 index cards:
 - Streamlined card front: removed redundant "English Vocabulary" label and renamed clue button to concise "Clue" / "Pista".
 - Added two-tab word addition modal: One by One form with staged word list and CSV / Paste parser.
 - Fully configured Progressive Web App (PWA) with `manifest.json`, Apple touch icon (`public/apple-touch-icon.png`), and Android maskable icons (192px and 512px).
-- Quiz-Style Mode implemented locally: 2 Spanish choices inside the card, green success animation on correct answer, auto-flip to definition on mistake, broad distractor pool (`src/data/distractors.ts`), and removal of redundant bottom buttons.
+- Quiz-Style Mode implemented locally: 2 Spanish choices inside the card, green success animation on correct answer, auto-flip to definition on mistake, blended distractor pool (`src/data/distractors.ts`), removal of redundant bottom buttons, and single-synonym selection for multi-word translations to prevent giveaway commas.
 - Pre-populated `Set 2` (10 words from textbook: arbitrary, mercenary, allusion, syndrome, euphemism, appease, banal, taint, assail, altruistic) in `words.csv` and `public/words.csv`.
 - Deployed live to Vercel: https://temporary-rushing-silicon-msiqw0l.vercel.app (awaiting user approval to deploy latest quiz changes).
+
