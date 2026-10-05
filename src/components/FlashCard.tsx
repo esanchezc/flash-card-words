@@ -46,8 +46,24 @@ export const FlashCard: React.FC<FlashCardProps> = ({
 
   // Generate 2 quiz options (1 correct, 1 distractor) stably per card
   const quizOptions = useMemo<QuizOption[]>(() => {
-    const correctText = card.translation;
-    const excludeList = [correctText, card.word, ...(card.notes ? [card.notes] : [])];
+    // Split synonyms if separated by comma, semicolon, or slash
+    const synonyms = card.translation
+      .split(/[,;/]/)
+      .map((s) => s.trim())
+      .filter(Boolean);
+
+    // Pick 1 single synonym randomly to avoid dead giveaways and visual imbalance
+    const correctText =
+      synonyms.length > 1
+        ? synonyms[Math.floor(Math.random() * synonyms.length)]
+        : card.translation.trim();
+
+    const excludeList = [
+      ...synonyms,
+      card.translation,
+      card.word,
+      ...(card.notes ? [card.notes] : []),
+    ];
     
     // Pick distractor from blended pool (curated list + actual deck translations)
     const distractorText = getRandomDistractor(

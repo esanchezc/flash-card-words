@@ -86,16 +86,18 @@ export function getRandomDistractor(
   excludeWords: string[],
   actualPool: string[] = []
 ): string {
-  const normalizedExclude = excludeWords.map((w) =>
-    w.toLowerCase().trim()
-  );
+  const normalizedExclude = excludeWords
+    .map((w) => w.toLowerCase().trim())
+    .filter((w) => w.length > 0);
 
-  // Combine curated distractors with words from the actual deck pool
+  // Combine curated distractors with individual terms from actual deck pool
+  const poolItems = actualPool
+    .flatMap((w) => w.split(/[,;/]/))
+    .map((w) => w.trim())
+    .filter((w) => w.length > 0);
+
   const combinedCandidates = Array.from(
-    new Set([
-      ...SPANISH_DISTRACTORS,
-      ...actualPool.map((w) => w.trim()).filter((w) => w.length > 0),
-    ])
+    new Set([...SPANISH_DISTRACTORS, ...poolItems])
   );
 
   const available = combinedCandidates.filter(
