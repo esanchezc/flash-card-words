@@ -44,3 +44,33 @@ body {
 .card-paper-shadow {
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04), 0 0 0 1px rgba(0, 0, 0, 0.04);
 }
+
+/* Quiz interaction animations */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-6px); }
+  40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes successPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes cardEnter {
+  0% { transform: scale(0.96) translateY(12px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
+}
+
+.animate-success-pulse {
+  animation: successPulse 0.35s ease-in-out;
+}
+
+.animate-card-enter {
+  animation: cardEnter 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}

@@ -22,6 +22,10 @@ export const translations = {
     definition: "Definition",
     translation: "Translation",
     example: "Example",
+    chooseMeaning: "Choose the meaning:",
+    continueBtn: "Continue →",
+    reviewAnswer: "Incorrect — Review Answer",
+    correct: "Correct!",
 
     // Controls
     needsWork: "Needs Work",
@@ -104,6 +108,10 @@ export const translations = {
     definition: "Definición",
     translation: "Traducción",
     example: "Ejemplo",
+    chooseMeaning: "Elige el significado:",
+    continueBtn: "Continuar →",
+    reviewAnswer: "Incorrecto — Repasar Respuesta",
+    correct: "¡Correcto!",
 
     // Controls
     needsWork: "Repasar",

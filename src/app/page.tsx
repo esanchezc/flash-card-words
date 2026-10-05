@@ -5,7 +5,6 @@ import { useDeck } from "@/hooks/useDeck";
 import { Header } from "@/components/Header";
 import { ProgressBar } from "@/components/ProgressBar";
 import { FlashCard } from "@/components/FlashCard";
-import { DeckControls } from "@/components/DeckControls";
 import { NewBucketModal } from "@/components/NewBucketModal";
 import { SessionComplete } from "@/components/SessionComplete";
 import { Loader2, Plus, Sparkles } from "lucide-react";
@@ -81,7 +80,7 @@ export default function Home() {
     totalCardsInBucket > 0 ? Math.min(masteredCount + 1, totalCardsInBucket) : 0;
 
   return (
-    <div className="h-[100dvh] w-full max-w-md mx-auto flex flex-col justify-between overflow-hidden bg-slate-50 text-slate-900 select-none">
+    <div className="h-[100dvh] w-full max-w-md mx-auto flex flex-col justify-between overflow-hidden bg-slate-50 text-slate-900 select-none pb-[env(safe-area-inset-bottom,0.5rem)]">
       {/* Top Header */}
       <div className="shrink-0 pt-[env(safe-area-inset-top,0.5rem)]">
         <Header
@@ -108,7 +107,7 @@ export default function Home() {
         )}
       </div>
 
-      {/* Main Content Area */}
+      {/* Main Content Area: FlashCard takes primary focus */}
       <main className="flex-1 flex flex-col justify-center items-center px-4 overflow-hidden">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center gap-3 text-slate-400">
@@ -134,6 +133,9 @@ export default function Home() {
             currentIndex={currentIndex}
             totalInQueue={queue.length}
             language={language}
+            onCorrect={markGotIt}
+            onIncorrect={markNeedsPractice}
+            otherTranslations={allCards.map((c) => c.translation)}
           />
         ) : (
           <div className="text-center p-6 bg-white rounded-3xl border border-slate-200 shadow-xs max-w-xs">
@@ -153,18 +155,6 @@ export default function Home() {
           </div>
         )}
       </main>
-
-      {/* Bottom Thumb Controls (hidden on complete or empty) */}
-      <div className="shrink-0 pb-[env(safe-area-inset-bottom,0.75rem)]">
-        {!isLoading && !isComplete && currentCard && (
-          <DeckControls
-            onNeedsPractice={markNeedsPractice}
-            onGotIt={markGotIt}
-            onFlip={toggleFlip}
-            language={language}
-          />
-        )}
-      </div>
 
       {/* New Bucket Modal */}
       <NewBucketModal
