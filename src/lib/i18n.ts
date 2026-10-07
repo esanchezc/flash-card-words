@@ -12,6 +12,9 @@ export const translations = {
     cardOf: "Card",
     of: "of",
     gotItBadge: "Got it",
+    modeFlashcards: "Flashcards",
+    modeSentenceCheck1: "Sentence Check 1",
+    modeSentenceCheck2: "Sentence Check 2",
 
     // Card
     clue: "Clue",
@@ -100,6 +103,9 @@ export const translations = {
     cardOf: "Tarjeta",
     of: "de",
     gotItBadge: "Aprendidas",
+    modeFlashcards: "Tarjetas",
+    modeSentenceCheck1: "Oraciones 1",
+    modeSentenceCheck2: "Oraciones 2",
 
     // Card
     clue: "Pista",
