@@ -33,10 +33,10 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
   const [bucketMode, setBucketMode] = useState<"new" | "existing">(
     existingBuckets.length > 0 ? "new" : "new"
   );
-  const defaultBucketName = `Set ${existingBuckets.length + 1}`;
+  const defaultBucketName = `Chapter ${existingBuckets.length + 1}`;
   const [customBucketName, setCustomBucketName] = useState(defaultBucketName);
   const [selectedExistingBucket, setSelectedExistingBucket] = useState(
-    existingBuckets[0] || "Set 1"
+    existingBuckets[0] || "Chapter 1"
   );
 
   // CSV Tab state

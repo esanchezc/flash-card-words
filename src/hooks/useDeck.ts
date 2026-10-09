@@ -17,7 +17,7 @@ export const GLOBAL_POOL_BUCKET = "__GLOBAL_POOL__";
 export function useDeck() {
   const [allCards, setAllCards] = useState<FlashCard[]>([]);
   const [starredIds, setStarredIds] = useState<string[]>([]);
-  const [activeBucket, setActiveBucketState] = useState<string>("Set 1");
+  const [activeBucket, setActiveBucketState] = useState<string>("Chapter 1");
   const [queue, setQueue] = useState<FlashCard[]>([]);
   const [masteredIds, setMasteredIds] = useState<string[]>([]);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
@@ -44,10 +44,15 @@ export function useDeck() {
         setStarredIds(savedStarred);
 
         const availableBuckets = Array.from(new Set(combined.map((c) => c.bucket)));
-        const initialBucket =
-          savedBucket && (availableBuckets.includes(savedBucket) || savedBucket === GLOBAL_POOL_BUCKET)
-            ? savedBucket
-            : availableBuckets[0] || "Set 1";
+        let initialBucket = savedBucket;
+        if (savedBucket === "Set 1" && !availableBuckets.includes("Set 1")) {
+          initialBucket = availableBuckets.includes("Chapter 4") ? "Chapter 4" : "Chapter 1";
+        } else if (savedBucket === "Set 2" && !availableBuckets.includes("Set 2")) {
+          initialBucket = availableBuckets.includes("Chapter 5") ? "Chapter 5" : "Chapter 1";
+        }
+        if (!initialBucket || (!availableBuckets.includes(initialBucket) && initialBucket !== GLOBAL_POOL_BUCKET)) {
+          initialBucket = availableBuckets[0] || "Chapter 1";
+        }
 
         setActiveBucketState(initialBucket);
       } catch (err) {

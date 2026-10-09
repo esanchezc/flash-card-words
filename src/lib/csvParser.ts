@@ -10,7 +10,7 @@ export function parseWordsCSV(csvText: string): FlashCard[] {
   return result.data
     .filter((row) => row.word && row.word.trim().length > 0)
     .map((row, index) => {
-      const bucket = (row.bucket || "Set 1").trim();
+      const bucket = (row.bucket || "Chapter 1").trim();
       const word = row.word.trim();
       return {
         id: `${bucket}-${word}-${index}`.toLowerCase().replace(/[^a-z0-9-]/g, "-"),

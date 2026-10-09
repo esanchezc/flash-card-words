@@ -27,7 +27,10 @@ Directly models physical handwritten 3x5 index cards:
 - Fully configured Progressive Web App (PWA) with `manifest.json`, Apple touch icon (`public/apple-touch-icon.png`), and Android maskable icons (192px and 512px).
 - Quiz-Style Mode implemented locally: 2 Spanish choices inside the card, green success animation on correct answer, auto-flip to definition on mistake, blended distractor pool (`src/data/distractors.ts`), removal of redundant bottom buttons, and single-synonym selection for multi-word translations to prevent giveaway commas.
 - Pre-populated `Set 2` (10 words from textbook: arbitrary, mercenary, allusion, syndrome, euphemism, appease, banal, taint, assail, altruistic) in `words.csv` and `public/words.csv`.
-- Sentence Check 1 & 2 Interactive Exercises implemented locally: segmented mode toggle (`🎴 Flashcards`, `📝 Check 1`, `🔗 Check 2`), tactile struck-through Word Bank (`src/components/WordBank.tsx`), single-blank sentence solver (`src/components/SentenceCheck1.tsx`), and two-blank passage solver (`src/components/SentenceCheck2.tsx`) pre-loaded with authentic textbook exercises for Set 1 and Set 2 (`src/data/sentenceChecks.ts`).
+- Sentence Check 1 & 2 Interactive Exercises implemented: segmented mode toggle (`🎴 Flashcards`, `📝 Check 1`, `🔗 Check 2`), tactile struck-through Word Bank (`src/components/WordBank.tsx`), single-blank sentence solver (`src/components/SentenceCheck1.tsx`), and two-blank passage solver (`src/components/SentenceCheck2.tsx`).
+- Ingested all 50 vocabulary words across Chapters 1 through 5 from the Townsend Press textbook photos into `words.csv` and `public/words.csv` with authentic handwritten Spanish notes and textbook example sentences.
+- Full Sentence Check 1 (50 items total, 10 per chapter) and Sentence Check 2 (25 items total, 5 two-blank pairs per chapter) loaded into `src/data/sentenceChecks.ts`.
+- Seamless backward compatibility and migration in `useDeck.ts` and `sentenceChecks.ts` for previous `Set 1` and `Set 2` entries.
 - GitHub Remote: `git@github.com:esanchezc/flash-card-words.git` (tracked on `main`).
 - Deployed live to Vercel: https://temporary-fast-khaki-otp9ax3.vercel.app (Claim URL: https://vercel.com/claim-deployment?code=4ad7b62f-b6fc-4461-bdb2-2576d80ece72).
 

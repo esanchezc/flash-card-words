@@ -84,7 +84,7 @@ export default function Home() {
 
   const activeSetKey =
     activeBucket === "__GLOBAL_POOL__"
-      ? "Set 2"
+      ? "Chapter 1"
       : activeBucket;
 
   const check1Items = SENTENCE_CHECKS_1[activeSetKey] || [];
