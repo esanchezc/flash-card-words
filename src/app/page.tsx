@@ -14,9 +14,12 @@ import { Loader2, Plus, Sparkles } from "lucide-react";
 import { Language, translations } from "@/lib/i18n";
 import { getStoredLanguage, saveStoredLanguage } from "@/lib/storage";
 
-type ActiveMode = "flashcards" | "check1" | "check2";
+type ActiveMode = "meaning" | "synonyms" | "check1" | "check2";
 
 export default function Home() {
+  const [activeMode, setActiveMode] = useState<ActiveMode>("meaning");
+  const cardMode = activeMode === "synonyms" ? "synonyms" : "meaning";
+
   const {
     allCards,
     buckets,
@@ -39,11 +42,10 @@ export default function Home() {
     addNewBucket,
     exportCSV,
     starredCountInBucket,
-  } = useDeck();
+  } = useDeck(cardMode);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [language, setLanguage] = useState<Language>("en");
-  const [activeMode, setActiveMode] = useState<ActiveMode>("flashcards");
 
   // Load language preference from storage on mount
   useEffect(() => {
@@ -113,24 +115,36 @@ export default function Home() {
           onToggleLanguage={handleToggleLanguage}
         />
 
-        {/* Mode Switcher Pills */}
-        <div className="flex items-center justify-center gap-1.5 px-4 py-1.5 bg-slate-100/90 border-b border-slate-200/70">
+        {/* Mode Switcher Pills (4 Modes) */}
+        <div className="grid grid-cols-4 gap-1 px-3 py-1.5 bg-slate-100/90 border-b border-slate-200/70">
           <button
             type="button"
-            onClick={() => setActiveMode("flashcards")}
-            className={`flex-1 py-1.5 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
-              activeMode === "flashcards"
+            onClick={() => setActiveMode("meaning")}
+            className={`py-1.5 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+              activeMode === "meaning"
                 ? "bg-white text-sky-700 shadow-xs border border-slate-200"
                 : "text-slate-500 hover:text-slate-800"
             }`}
           >
             <span>🎴</span>
-            <span className="truncate">{t.modeFlashcards}</span>
+            <span className="truncate">{t.modeMeaning}</span>
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveMode("synonyms")}
+            className={`py-1.5 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
+              activeMode === "synonyms"
+                ? "bg-white text-sky-700 shadow-xs border border-slate-200"
+                : "text-slate-500 hover:text-slate-800"
+            }`}
+          >
+            <span>✨</span>
+            <span className="truncate">{t.modeSynonyms}</span>
           </button>
           <button
             type="button"
             onClick={() => setActiveMode("check1")}
-            className={`flex-1 py-1.5 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+            className={`py-1.5 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
               activeMode === "check1"
                 ? "bg-white text-sky-700 shadow-xs border border-slate-200"
                 : "text-slate-500 hover:text-slate-800"
@@ -142,7 +156,7 @@ export default function Home() {
           <button
             type="button"
             onClick={() => setActiveMode("check2")}
-            className={`flex-1 py-1.5 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 ${
+            className={`py-1.5 px-1 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center justify-center gap-1 ${
               activeMode === "check2"
                 ? "bg-white text-sky-700 shadow-xs border border-slate-200"
                 : "text-slate-500 hover:text-slate-800"
@@ -153,8 +167,8 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Flashcards Progress Bar (only visible in flashcards mode) */}
-        {activeMode === "flashcards" &&
+        {/* Progress Bar (visible in meaning & synonyms modes) */}
+        {(activeMode === "meaning" || activeMode === "synonyms") &&
           !isLoading &&
           !isComplete &&
           totalCardsInBucket > 0 && (
@@ -192,7 +206,7 @@ export default function Home() {
               allSetWords={displayWords}
               bucketName={activeSetKey}
               language={language}
-              onSelectAnotherMode={() => setActiveMode("flashcards")}
+              onSelectAnotherMode={() => setActiveMode("meaning")}
             />
           </div>
         ) : isComplete ? (
@@ -209,6 +223,7 @@ export default function Home() {
           <div className="w-full my-auto flex flex-col items-center justify-center">
             <FlashCard
               card={currentCard}
+              quizType={cardMode}
               isFlipped={isFlipped}
               onFlip={toggleFlip}
               onToggleStar={toggleStar}

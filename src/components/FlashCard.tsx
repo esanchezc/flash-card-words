@@ -5,9 +5,11 @@ import { FlashCard as FlashCardType } from "@/types/card";
 import { Star, RotateCw, Eye, EyeOff, Check, X, ArrowRight, AlertCircle } from "lucide-react";
 import { Language, translations } from "@/lib/i18n";
 import { getRandomDistractor } from "@/data/distractors";
+import { getSynonymQuizOptions, getSynonymEntry } from "@/data/synonyms";
 
 interface FlashCardProps {
   card: FlashCardType;
+  quizType?: "meaning" | "synonyms";
   isFlipped: boolean;
   onFlip: () => void;
   onToggleStar: (id: string) => void;
@@ -26,6 +28,7 @@ interface QuizOption {
 
 export const FlashCard: React.FC<FlashCardProps> = ({
   card,
+  quizType = "meaning",
   isFlipped,
   onFlip,
   onToggleStar,
@@ -44,8 +47,15 @@ export const FlashCard: React.FC<FlashCardProps> = ({
 
   const t = translations[language];
 
+  // Retrieve curated English synonym entry if available
+  const synonymEntry = useMemo(() => getSynonymEntry(card.word), [card.word]);
+
   // Generate 2 quiz options (1 correct, 1 distractor) stably per card
   const quizOptions = useMemo<QuizOption[]>(() => {
+    if (quizType === "synonyms") {
+      return getSynonymQuizOptions(card.word, card.definition);
+    }
+
     // Split synonyms if separated by comma, semicolon, or slash
     const synonyms = card.translation
       .split(/[,;/]/)
@@ -78,7 +88,7 @@ export const FlashCard: React.FC<FlashCardProps> = ({
 
     // Randomize 50/50 order
     return Math.random() > 0.5 ? options : [options[1], options[0]];
-  }, [card.id, card.translation, card.word, card.notes, otherTranslations]);
+  }, [quizType, card.id, card.word, card.definition, card.translation, card.notes, otherTranslations]);
 
   // Reset state when moving to a new card
   useEffect(() => {
@@ -206,7 +216,7 @@ export const FlashCard: React.FC<FlashCardProps> = ({
           {/* Bottom Section: Quiz Choices (2 Options Inside Card) */}
           <div className="space-y-2 pt-2 border-t border-slate-100">
             <p className="text-[11px] font-bold text-slate-400 uppercase tracking-wider text-center">
-              {t.chooseMeaning}
+              {quizType === "synonyms" ? t.chooseSynonym : t.chooseMeaning}
             </p>
 
             <div className="grid grid-cols-1 gap-2">
@@ -285,20 +295,47 @@ export const FlashCard: React.FC<FlashCardProps> = ({
 
           {/* Center: Translation + Notes + English Definition & Example */}
           <div className="flex-1 flex flex-col justify-center my-2 overflow-y-auto pr-1 space-y-2.5">
-            {/* Correct Spanish Translation */}
-            <div>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
-                {t.translation}
-              </span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 capitalize">
-                {card.translation}
-              </h2>
-              {card.notes && (
-                <p className="text-xs text-amber-700 font-medium mt-0.5">
-                  * {card.notes}
-                </p>
-              )}
-            </div>
+            {quizType === "synonyms" ? (
+              /* When in Synonyms mode, highlight the English Synonym block */
+              <div className="p-3 bg-amber-50/80 border border-amber-200 rounded-2xl">
+                <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block mb-0.5">
+                  {t.synonym} ({card.word})
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-extrabold text-amber-950 capitalize">
+                  {synonymEntry?.primary || card.word}
+                </h2>
+                {synonymEntry?.alternatives && synonymEntry.alternatives.length > 0 && (
+                  <p className="text-xs text-amber-800 font-medium mt-1">
+                    {t.synonyms}: {synonymEntry.alternatives.join(", ")}
+                  </p>
+                )}
+                <div className="mt-2 pt-2 border-t border-amber-200/60 flex items-center justify-between text-xs">
+                  <span className="text-amber-800/80 font-medium">{t.translation}:</span>
+                  <span className="font-bold text-amber-950 capitalize">{card.translation}</span>
+                </div>
+              </div>
+            ) : (
+              /* When in Meaning mode, highlight the Spanish Translation */
+              <div>
+                <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-0.5">
+                  {t.translation}
+                </span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-slate-900 capitalize">
+                  {card.translation}
+                </h2>
+                {card.notes && (
+                  <p className="text-xs text-amber-700 font-medium mt-0.5">
+                    * {card.notes}
+                  </p>
+                )}
+                {synonymEntry?.primary && (
+                  <div className="mt-1.5 inline-flex items-center gap-1.5 px-2 py-0.5 bg-sky-50 text-sky-700 border border-sky-100 rounded-md text-[11px] font-medium">
+                    <span className="font-bold">{t.synonym}:</span>
+                    <span className="capitalize">{synonymEntry.primary}</span>
+                  </div>
+                )}
+              </div>
+            )}
 
             {/* Definition Box */}
             <div className="p-3 bg-slate-50 border border-slate-200/70 rounded-xl">

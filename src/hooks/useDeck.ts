@@ -14,12 +14,16 @@ import {
 
 export const GLOBAL_POOL_BUCKET = "__GLOBAL_POOL__";
 
-export function useDeck() {
+export type CardMode = "meaning" | "synonyms";
+
+export function useDeck(cardMode: CardMode = "meaning") {
   const [allCards, setAllCards] = useState<FlashCard[]>([]);
   const [starredIds, setStarredIds] = useState<string[]>([]);
   const [activeBucket, setActiveBucketState] = useState<string>("Chapter 1");
-  const [queue, setQueue] = useState<FlashCard[]>([]);
-  const [masteredIds, setMasteredIds] = useState<string[]>([]);
+  const [meaningQueue, setMeaningQueue] = useState<FlashCard[]>([]);
+  const [meaningMastered, setMeaningMastered] = useState<string[]>([]);
+  const [synonymsQueue, setSynonymsQueue] = useState<FlashCard[]>([]);
+  const [synonymsMastered, setSynonymsMastered] = useState<string[]>([]);
   const [isFlipped, setIsFlipped] = useState<boolean>(false);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -78,22 +82,36 @@ export function useDeck() {
     return allCards.filter((c) => c.bucket === activeBucket);
   }, [allCards, activeBucket]);
 
-  // Reset session queue whenever active bucket changes or initial load completes
+  // Reset session queues whenever active bucket changes or initial load completes
   useEffect(() => {
     if (bucketCards.length > 0) {
-      setQueue([...bucketCards]);
-      setMasteredIds([]);
+      setMeaningQueue([...bucketCards]);
+      setMeaningMastered([]);
+      setSynonymsQueue([...bucketCards]);
+      setSynonymsMastered([]);
       setIsFlipped(false);
     } else {
-      setQueue([]);
+      setMeaningQueue([]);
+      setMeaningMastered([]);
+      setSynonymsQueue([]);
+      setSynonymsMastered([]);
     }
   }, [activeBucket, bucketCards.length]);
+
+  // Reset flip whenever mode changes
+  useEffect(() => {
+    setIsFlipped(false);
+  }, [cardMode]);
 
   const setActiveBucket = useCallback((bucket: string) => {
     setActiveBucketState(bucket);
     saveStoredActiveBucket(bucket);
     setIsFlipped(false);
   }, []);
+
+  // Active queue and mastered based on current cardMode
+  const queue = cardMode === "synonyms" ? synonymsQueue : meaningQueue;
+  const masteredIds = cardMode === "synonyms" ? synonymsMastered : meaningMastered;
 
   const currentCard = queue[0] || null;
   const isComplete = queue.length === 0 && bucketCards.length > 0;
@@ -102,26 +120,37 @@ export function useDeck() {
     setIsFlipped((prev) => !prev);
   }, []);
 
-  // Got It: mark card mastered, remove from queue
+  // Got It: mark card mastered, remove from active queue
   const markGotIt = useCallback(() => {
     if (!currentCard) return;
 
-    setMasteredIds((prev) => [...prev, currentCard.id]);
-    setQueue((prevQueue) => prevQueue.slice(1));
+    if (cardMode === "synonyms") {
+      setSynonymsMastered((prev) => [...prev, currentCard.id]);
+      setSynonymsQueue((prevQueue) => prevQueue.slice(1));
+    } else {
+      setMeaningMastered((prev) => [...prev, currentCard.id]);
+      setMeaningQueue((prevQueue) => prevQueue.slice(1));
+    }
     setIsFlipped(false);
-  }, [currentCard]);
+  }, [currentCard, cardMode]);
 
-  // Needs Practice: move current card to back of queue
+  // Needs Practice: move current card to back of active queue
   const markNeedsPractice = useCallback(() => {
     if (!currentCard) return;
 
-    setQueue((prevQueue) => {
+    const rotate = (prevQueue: FlashCard[]) => {
       if (prevQueue.length <= 1) return prevQueue;
       const [first, ...rest] = prevQueue;
       return [...rest, first];
-    });
+    };
+
+    if (cardMode === "synonyms") {
+      setSynonymsQueue(rotate);
+    } else {
+      setMeaningQueue(rotate);
+    }
     setIsFlipped(false);
-  }, [currentCard]);
+  }, [currentCard, cardMode]);
 
   // Toggle Star / Favorite
   const toggleStar = useCallback((id: string) => {
@@ -131,37 +160,51 @@ export function useDeck() {
       return next;
     });
 
-    setAllCards((prevCards) =>
-      prevCards.map((c) => (c.id === id ? { ...c, starred: !c.starred } : c))
-    );
+    const updateStar = (list: FlashCard[]) =>
+      list.map((c) => (c.id === id ? { ...c, starred: !c.starred } : c));
 
-    setQueue((prevQueue) =>
-      prevQueue.map((c) => (c.id === id ? { ...c, starred: !c.starred } : c))
-    );
+    setAllCards(updateStar);
+    setMeaningQueue(updateStar);
+    setSynonymsQueue(updateStar);
   }, []);
 
-  // Restart current session
+  // Restart current session for active mode
   const restartSession = useCallback(() => {
-    setQueue([...bucketCards]);
-    setMasteredIds([]);
+    if (cardMode === "synonyms") {
+      setSynonymsQueue([...bucketCards]);
+      setSynonymsMastered([]);
+    } else {
+      setMeaningQueue([...bucketCards]);
+      setMeaningMastered([]);
+    }
     setIsFlipped(false);
-  }, [bucketCards]);
+  }, [bucketCards, cardMode]);
 
-  // Shuffle queue
+  // Shuffle queue for active mode
   const shuffleQueue = useCallback(() => {
-    setQueue((prev) => [...prev].sort(() => Math.random() - 0.5));
+    const shuffle = (prev: FlashCard[]) => [...prev].sort(() => Math.random() - 0.5);
+    if (cardMode === "synonyms") {
+      setSynonymsQueue(shuffle);
+    } else {
+      setMeaningQueue(shuffle);
+    }
     setIsFlipped(false);
-  }, []);
+  }, [cardMode]);
 
-  // Filter queue to only Starred words in this bucket
+  // Filter queue to only Starred words in this bucket for active mode
   const practiceStarredOnly = useCallback(() => {
     const starredInBucket = bucketCards.filter((c) => starredIds.includes(c.id));
     if (starredInBucket.length > 0) {
-      setQueue([...starredInBucket]);
-      setMasteredIds([]);
+      if (cardMode === "synonyms") {
+        setSynonymsQueue([...starredInBucket]);
+        setSynonymsMastered([]);
+      } else {
+        setMeaningQueue([...starredInBucket]);
+        setMeaningMastered([]);
+      }
       setIsFlipped(false);
     }
-  }, [bucketCards, starredIds]);
+  }, [bucketCards, starredIds, cardMode]);
 
   // Add a new bucket with cards
   const addNewBucket = useCallback(
