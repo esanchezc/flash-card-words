@@ -2,10 +2,15 @@
 
 import React, { useState, useEffect, useMemo } from "react";
 import { FlashCard as FlashCardType } from "@/types/card";
-import { Star, RotateCw, Eye, EyeOff, Check, X, ArrowRight, AlertCircle } from "lucide-react";
+import { Star, RotateCw, Eye, EyeOff, Check, X, ArrowRight, AlertCircle, Sparkles } from "lucide-react";
 import { Language, translations } from "@/lib/i18n";
 import { getRandomDistractor } from "@/data/distractors";
-import { getSynonymQuizOptions, getSynonymEntry } from "@/data/synonyms";
+import {
+  getSynonymQuizOptions,
+  getSynonymEntry,
+  getSwappedSentence,
+  splitSentenceForHighlight,
+} from "@/data/synonyms";
 
 interface FlashCardProps {
   card: FlashCardType;
@@ -49,6 +54,21 @@ export const FlashCard: React.FC<FlashCardProps> = ({
 
   // Retrieve curated English synonym entry if available
   const synonymEntry = useMemo(() => getSynonymEntry(card.word), [card.word]);
+
+  // Context sentence where the target word can be swapped with its synonym
+  const contextSentence = useMemo(() => {
+    return synonymEntry?.sentence || card.example || null;
+  }, [synonymEntry, card.example]);
+
+  const highlightedSentence = useMemo(() => {
+    if (!contextSentence) return null;
+    return splitSentenceForHighlight(contextSentence, card.word);
+  }, [contextSentence, card.word]);
+
+  const swappedSentence = useMemo(() => {
+    if (!contextSentence || !synonymEntry?.primary) return null;
+    return getSwappedSentence(contextSentence, card.word, synonymEntry.primary);
+  }, [contextSentence, card.word, synonymEntry]);
 
   // Generate 2 quiz options (1 correct, 1 distractor) stably per card
   const quizOptions = useMemo<QuizOption[]>(() => {
@@ -180,14 +200,39 @@ export const FlashCard: React.FC<FlashCardProps> = ({
             </div>
           </div>
 
-          {/* Center: Main Word (Bold marker aesthetic) */}
-          <div className="my-auto py-2 flex flex-col items-center justify-center text-center px-2">
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-sky-600 tracking-tight capitalize">
+          {/* Center: Main Word (Bold marker aesthetic) + Swap Context Sentence */}
+          <div className="my-auto py-1 flex flex-col items-center justify-center text-center px-1 w-full">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-sky-600 tracking-tight capitalize mb-1">
               {card.word}
             </h1>
 
+            {/* In Synonyms mode: Context sentence with target word highlighted */}
+            {quizType === "synonyms" && contextSentence && (
+              <div className="mt-1.5 mb-2 w-full max-w-[340px] px-3.5 py-2 bg-sky-50/90 border border-sky-200/80 rounded-2xl text-left shadow-2xs">
+                <div className="flex items-center gap-1.5 mb-1">
+                  <Sparkles className="w-3 h-3 text-sky-500 shrink-0" />
+                  <span className="text-[10px] font-bold text-sky-700 uppercase tracking-wider">
+                    {t.swapContext}
+                  </span>
+                </div>
+                <p className="text-xs sm:text-[13px] font-serif text-slate-800 leading-snug">
+                  {highlightedSentence ? (
+                    <>
+                      &ldquo;{highlightedSentence.before}
+                      <span className="font-sans font-bold text-sky-950 bg-sky-200/90 px-1 py-0.5 rounded border border-sky-300">
+                        {highlightedSentence.match}
+                      </span>
+                      {highlightedSentence.after}&rdquo;
+                    </>
+                  ) : (
+                    <>&ldquo;{contextSentence}&rdquo;</>
+                  )}
+                </p>
+              </div>
+            )}
+
             {/* Optional Clue button (Peeks English definition if needed before answering) */}
-            <div className="mt-3 w-full max-w-[280px]">
+            <div className="mt-1 w-full max-w-[280px]">
               <button
                 type="button"
                 onClick={handleClueClick}
@@ -309,6 +354,29 @@ export const FlashCard: React.FC<FlashCardProps> = ({
                     {t.synonyms}: {synonymEntry.alternatives.join(", ")}
                   </p>
                 )}
+
+                {/* Swapped Sentence Demonstration */}
+                {contextSentence && (
+                  <div className="mt-2.5 pt-2 border-t border-amber-200/60 text-left">
+                    <span className="text-[10px] font-bold text-amber-800 uppercase tracking-wider block mb-0.5">
+                      {t.swappedInSentence}
+                    </span>
+                    <p className="text-xs sm:text-[13px] font-serif text-slate-800 leading-snug italic">
+                      &ldquo;{highlightedSentence ? (
+                        <>
+                          {highlightedSentence.before}
+                          <span className="font-sans font-bold text-emerald-900 bg-emerald-100/90 px-1 py-0.5 rounded border border-emerald-300 not-italic">
+                            {synonymEntry?.primary || card.word}
+                          </span>
+                          {highlightedSentence.after}
+                        </>
+                      ) : (
+                        swappedSentence || contextSentence
+                      )}&rdquo;
+                    </p>
+                  </div>
+                )}
+
                 <div className="mt-2 pt-2 border-t border-amber-200/60 flex items-center justify-between text-xs">
                   <span className="text-amber-800/80 font-medium">{t.translation}:</span>
                   <span className="font-bold text-amber-950 capitalize">{card.translation}</span>

@@ -31,7 +31,7 @@ Directly models physical handwritten 3x5 index cards:
 - Ingested all 50 vocabulary words across Chapters 1 through 5 from the Townsend Press textbook photos into `words.csv` and `public/words.csv` with authentic handwritten Spanish notes and textbook example sentences.
 - Full Sentence Check 1 (50 items total, 10 per chapter) and Sentence Check 2 (25 items total, 5 two-blank pairs per chapter) loaded into `src/data/sentenceChecks.ts`.
 - Seamless backward compatibility and migration in `useDeck.ts` and `sentenceChecks.ts` for previous `Set 1` and `Set 2` entries.
-- English Synonyms Practice Mode added (`src/data/synonyms.ts`): dedicated 2-choice English synonym quiz (1 correct synonym, 1 distractor), auto-reveal and flip on mistake, prominent synonym banner on card back, and independent queue tracking between Meaning (`🎴 Meaning` / `Significado`) and Synonyms (`✨ Synonyms` / `Sinónimos`).
+- English Synonyms Practice Mode added (`src/data/synonyms.ts`): dedicated 2-choice English synonym quiz (1 correct synonym, 1 distractor), auto-reveal and flip on mistake, prominent synonym banner on card back, independent queue tracking between Meaning (`🎴 Meaning` / `Significado`) and Synonyms (`✨ Synonyms` / `Sinónimos`), and contextual swap sentences on card front & back demonstrating drop-in synonym substitution.
 - Mode navigation updated to 4 clean mobile pills: `🎴 Meaning`, `✨ Synonyms`, `📝 Check 1`, `🔗 Check 2`.
 - GitHub Remote: `git@github.com:esanchezc/flash-card-words.git` (tracked on `main`).
 - Deployed live to Vercel: https://temporary-fast-khaki-otp9ax3.vercel.app (Claim URL: https://vercel.com/claim-deployment?code=4ad7b62f-b6fc-4461-bdb2-2576d80ece72).
