@@ -19,7 +19,7 @@ export const DeckControls: React.FC<DeckControlsProps> = ({
   disabled = false,
   language,
 }) => {
-  const t = translations[language];
+  const t = translations[language] || translations.en;
 
   // Desktop keyboard listeners
   useEffect(() => {

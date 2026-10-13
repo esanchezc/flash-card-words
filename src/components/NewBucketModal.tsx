@@ -24,7 +24,7 @@ export const NewBucketModal: React.FC<NewBucketModalProps> = ({
   existingBuckets,
   language,
 }) => {
-  const t = translations[language];
+  const t = translations[language] || translations.en;
 
   // Active Tab: "csv" | "oneByOne"
   const [activeTab, setActiveTab] = useState<"csv" | "oneByOne">("oneByOne");

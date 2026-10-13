@@ -63,7 +63,7 @@ export default function Home() {
     });
   };
 
-  const t = translations[language];
+  const t = translations[language] || translations.en;
 
   // Trigger CSV file download
   const handleExportCSV = () => {

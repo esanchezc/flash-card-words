@@ -29,7 +29,7 @@ export const Header: React.FC<HeaderProps> = ({
   onToggleLanguage,
 }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const t = translations[language];
+  const t = translations[language] || translations.en;
 
   const activeLabel =
     activeBucket === GLOBAL_POOL_BUCKET ? t.globalPool : activeBucket;

@@ -19,7 +19,7 @@ export const ProgressBar: React.FC<ProgressBarProps> = ({
   bucketName,
   language,
 }) => {
-  const t = translations[language];
+  const t = translations[language] || translations.en;
   const percent = totalCards > 0 ? Math.round((masteredCount / totalCards) * 100) : 0;
 
   return (

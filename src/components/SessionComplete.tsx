@@ -26,7 +26,7 @@ export const SessionComplete: React.FC<SessionCompleteProps> = ({
   starredCount,
   language,
 }) => {
-  const t = translations[language];
+  const t = translations[language] || translations.en;
 
   useEffect(() => {
     try {

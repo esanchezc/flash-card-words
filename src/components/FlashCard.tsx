@@ -45,7 +45,7 @@ export const FlashCard: React.FC<FlashCardProps> = ({
   const [isCorrectChoice, setIsCorrectChoice] = useState<boolean | null>(null);
   const [isExiting, setIsExiting] = useState<boolean>(false);
 
-  const t = translations[language];
+  const t = translations[language] || translations.en;
 
   // Retrieve curated English synonym entry if available
   const synonymEntry = useMemo(() => getSynonymEntry(card.word), [card.word]);
