@@ -34,6 +34,6 @@ Directly models physical handwritten 3x5 index cards:
 - English Synonyms Practice Mode added (`src/data/synonyms.ts`): dedicated 2-choice English synonym quiz (1 correct synonym, 1 distractor), auto-reveal and flip on mistake, prominent synonym banner on card back, independent queue tracking between Meaning (`🎴 Meaning` / `Significado`) and Synonyms (`✨ Synonyms` / `Sinónimos`), and contextual swap sentences on card front & back demonstrating drop-in synonym substitution.
 - Mode navigation updated to 4 clean mobile pills: `🎴 Meaning`, `✨ Synonyms`, `📝 Check 1`, `🔗 Check 2`.
 - GitHub Remote: `git@github.com:esanchezc/flash-card-words.git` (tracked on `main`).
-- Deployed live to Vercel: https://temporary-fast-khaki-otp9ax3.vercel.app (Claim URL: https://vercel.com/claim-deployment?code=4ad7b62f-b6fc-4461-bdb2-2576d80ece72).
+- Deployed live to Vercel: https://flashcards-study-english-words.vercel.app
 
 
