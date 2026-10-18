@@ -366,6 +366,85 @@ export const SYNONYMS_DATA: Record<string, SynonymEntry> = {
     distractors: ["purify", "cleanse", "sanctify"],
     sentence: "Bribery rumors will taint the politician's good reputation.",
   },
+
+  // Chapter 19
+  benign: {
+    word: "benign",
+    primary: "gentle",
+    alternatives: ["kindly", "harmless", "kindhearted", "benevolent"],
+    distractors: ["hostile", "cruel", "severe", "malignant"],
+    sentence: "The doctor gave a benign smile that instantly comforted the nervous patient.",
+  },
+  blasé: {
+    word: "blasé",
+    primary: "unexcited",
+    alternatives: ["indifferent", "unimpressed", "bored", "apathetic"],
+    distractors: ["enthusiastic", "eager", "fascinated", "thrilled"],
+    sentence: "After visiting twenty countries, the traveler grew blasé about seeing new cities.",
+  },
+  blase: {
+    word: "blasé",
+    primary: "unexcited",
+    alternatives: ["indifferent", "unimpressed", "bored", "apathetic"],
+    distractors: ["enthusiastic", "eager", "fascinated", "thrilled"],
+    sentence: "After visiting twenty countries, the traveler grew blasé about seeing new cities.",
+  },
+  comprise: {
+    word: "comprise",
+    primary: "include",
+    alternatives: ["contain", "consist of", "encompass"],
+    distractors: ["exclude", "separate", "divide", "eliminate"],
+    sentence: "The new committee will comprise teachers, students, and parents.",
+  },
+  condescend: {
+    word: "condescend",
+    primary: "stoop",
+    alternatives: ["deign", "lower oneself", "humble oneself"],
+    distractors: ["respect", "admire", "elevate", "praise"],
+    sentence: "The proud champion would not condescend to reply to the rude comment.",
+  },
+  facade: {
+    word: "facade",
+    primary: "front",
+    alternatives: ["exterior", "appearance", "mask", "face"],
+    distractors: ["interior", "core", "center", "inside"],
+    sentence: "Behind the elegant facade stood a simple brick building.",
+  },
+  glib: {
+    word: "glib",
+    primary: "slick",
+    alternatives: ["smooth-talking", "persuasive", "smooth"],
+    distractors: ["hesitant", "sincere", "awkward", "clumsy"],
+    sentence: "The politician offered a glib explanation for the missing funds.",
+  },
+  haughty: {
+    word: "haughty",
+    primary: "arrogant",
+    alternatives: ["snobbish", "conceited", "proud", "vain"],
+    distractors: ["humble", "modest", "meek", "polite"],
+    sentence: "Her haughty attitude turned away many potential friends.",
+  },
+  libel: {
+    word: "libel",
+    primary: "defamation",
+    alternatives: ["slander", "smear", "calumny"],
+    distractors: ["praise", "truth", "compliment", "tribute"],
+    sentence: "The actress sued the magazine for malicious libel after the false story.",
+  },
+  pseudonym: {
+    word: "pseudonym",
+    primary: "pen name",
+    alternatives: ["alias", "assumed name", "false name"],
+    distractors: ["real name", "birth name", "legal name", "identity"],
+    sentence: "The novelist published under a pseudonym to keep her real name private.",
+  },
+  redundant: {
+    word: "redundant",
+    primary: "repetitive",
+    alternatives: ["superfluous", "wordy", "repetitious", "unneeded"],
+    distractors: ["concise", "essential", "necessary", "brief"],
+    sentence: "The editor cut out redundant paragraphs from the long article.",
+  },
 };
 
 /**

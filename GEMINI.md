@@ -34,6 +34,7 @@ Directly models physical handwritten 3x5 index cards:
 - English Synonyms Practice Mode added (`src/data/synonyms.ts`): dedicated 2-choice English synonym quiz (1 correct synonym, 1 distractor), auto-reveal and flip on mistake, prominent synonym banner on card back, independent queue tracking between Meaning (`🎴 Meaning` / `Significado`) and Synonyms (`✨ Synonyms` / `Sinónimos`), and contextual swap sentences on card front & back demonstrating drop-in synonym substitution.
 - Mode navigation updated to 4 clean mobile pills: `🎴 Meaning`, `✨ Synonyms`, `📝 Check 1`, `🔗 Check 2`.
 - GitHub Remote: `git@github.com:esanchezc/flash-card-words.git` (tracked on `main`).
+- Ingested Chapter 19 vocabulary words (benign, blasé, comprise, condescend, facade, glib, haughty, libel, pseudonym, redundant) from textbook photos into `words.csv` and `public/words.csv` with authentic handwritten Spanish notes and textbook example sentences.
+- Chapter 19 full Sentence Check 1 (10 items) and Sentence Check 2 (5 two-blank pairs) loaded into `src/data/sentenceChecks.ts`.
+- Chapter 19 English Synonyms data added to `src/data/synonyms.ts` with dedicated swap sentences, primary synonyms, and distractors across both `blasé` and `blase`.
 - Deployed live to Vercel: https://flashcards-study-english-words.vercel.app
-
-

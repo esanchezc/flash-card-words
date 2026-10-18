@@ -537,12 +537,116 @@ const CHAPTER_5_CHECK_1: SentenceCheck1Item[] = [
   },
 ];
 
+const CHAPTER_19_CHECK_1: SentenceCheck1Item[] = [
+  {
+    id: "ch19-sc1-1",
+    bucket: "Chapter 19",
+    itemNumber: 1,
+    sentenceBefore: "Harry, always ready with some made-up excuse, is ",
+    targetWord: "glib",
+    sentenceAfter: " enough to talk himself out of any difficulty at the snap of a finger.",
+    hint: "Characterized by a smooth, easy manner of speaking that often suggests insincerity.",
+    explanation: 'Harry is "glib" (smooth-talking and slick) when making up fast excuses.',
+  },
+  {
+    id: "ch19-sc1-2",
+    bucket: "Chapter 19",
+    itemNumber: 2,
+    sentenceBefore: "One actress sued a magazine for ",
+    targetWord: "libel",
+    sentenceAfter: " because it printed a false and damaging story about her being drunk in public.",
+    hint: "The publishing of false information that harms a person's reputation.",
+    explanation: 'Printing false, defamatory stories that harm someone is "libel".',
+  },
+  {
+    id: "ch19-sc1-3",
+    bucket: "Chapter 19",
+    itemNumber: 3,
+    sentenceBefore: "Since becoming a fashion model, Nora has been very ",
+    targetWord: "haughty",
+    sentenceAfter: ", even snubbing some of her old, unglamorous friends.",
+    hint: "Proud of one's appearance or accomplishments to the point of looking down on others; arrogant.",
+    explanation: 'Looking down on former friends shows Nora has become "haughty" (arrogant and snobbish).',
+  },
+  {
+    id: "ch19-sc1-4",
+    bucket: "Chapter 19",
+    itemNumber: 4,
+    sentenceBefore: "My aunt's texts are annoyingly ",
+    targetWord: "redundant",
+    sentenceAfter: ', repeating "news" she has already given us by telephone.',
+    hint: "Wordy or needlessly repetitive.",
+    explanation: 'Repeating messages that were already delivered makes them "redundant" (needlessly repetitive).',
+  },
+  {
+    id: "ch19-sc1-5",
+    bucket: "Chapter 19",
+    itemNumber: 5,
+    sentenceBefore: "A receptionist's job ",
+    targetWord: "comprise",
+    sentenceAfter: "s answering the phone, greeting customers, opening the mail, dealing with messengers, and smiling.",
+    hint: "To consist of; include.",
+    explanation: 'Her daily duties "comprise" (consist of or include) all of those responsibilities.',
+  },
+  {
+    id: "ch19-sc1-6",
+    bucket: "Chapter 19",
+    itemNumber: 6,
+    sentenceBefore: "Samuel Langhorne Clemens wasn't the first author to use the ",
+    targetWord: "pseudonym",
+    sentenceAfter: " Mark Twain. A newspaper writer of the time used the same pen name.",
+    hint: "A false name used by an author; a pen name.",
+    explanation: 'Mark Twain was the famous literary "pseudonym" (pen name) of Samuel Clemens.',
+  },
+  {
+    id: "ch19-sc1-7",
+    bucket: "Chapter 19",
+    itemNumber: 7,
+    sentenceBefore: "The conceited young baseball player wouldn't ",
+    targetWord: "condescend",
+    sentenceAfter: " to talk to his fans until an old-timer reminded him that the fans were the ones who had made him a star.",
+    hint: "To do something one feels is beneath oneself.",
+    explanation: 'He refused to "condescend" (lower himself) to speak with his fans.',
+  },
+  {
+    id: "ch19-sc1-8",
+    bucket: "Chapter 19",
+    itemNumber: 8,
+    sentenceBefore: "Lidia's grandfather made her a dollhouse with a ",
+    targetWord: "facade",
+    sentenceAfter: " just like the front of her family's house: black shutters, a red front door, and even the same address.",
+    hint: "The front of a building.",
+    explanation: 'The dollhouse front mimics the "facade" (front exterior) of the actual home.',
+  },
+  {
+    id: "ch19-sc1-9",
+    bucket: "Chapter 19",
+    itemNumber: 9,
+    sentenceBefore: "When my sister first got her job at the recording studio, she was thrilled to go to work each day. Now, after ten years, she's ",
+    targetWord: "blasé",
+    sentenceAfter: " about her work and wants to change jobs.",
+    hint: "Unexcited or bored about something already experienced repeatedly.",
+    explanation: 'After ten years, the excitement waned and she became "blasé" (bored / indifferent).',
+  },
+  {
+    id: "ch19-sc1-10",
+    bucket: "Chapter 19",
+    itemNumber: 10,
+    sentenceBefore: "In his usual ",
+    targetWord: "benign",
+    sentenceAfter: " manner, my neighbor carefully picked up the ant in his kitchen, brought it outside, and gently put it down on the sidewalk.",
+    hint: "Kindly; gentle.",
+    explanation: 'Carefully rescuing an ant demonstrates his gentle, "benign" nature.',
+  },
+];
+
 export const SENTENCE_CHECKS_1: Record<string, SentenceCheck1Item[]> = {
   "Chapter 1": CHAPTER_1_CHECK_1,
   "Chapter 2": CHAPTER_2_CHECK_1,
   "Chapter 3": CHAPTER_3_CHECK_1,
   "Chapter 4": CHAPTER_4_CHECK_1,
   "Chapter 5": CHAPTER_5_CHECK_1,
+  "Chapter 19": CHAPTER_19_CHECK_1,
   "Set 1": CHAPTER_4_CHECK_1, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_1, // Backward compatibility alias
 };
@@ -913,12 +1017,86 @@ const CHAPTER_5_CHECK_2: SentenceCheck2Item[] = [
   },
 ];
 
+const CHAPTER_19_CHECK_2: SentenceCheck2Item[] = [
+  {
+    id: "ch19-sc2-1",
+    bucket: "Chapter 19",
+    itemNumber: 1,
+    targetWords: ["libel", "pseudonym"],
+    part1: "One author was accused of ",
+    part2: " when he wrote a damaging article about the governor's wife. Subsequently, he used a ",
+    part3: " so people wouldn't know he was the author whose facts were in doubt.",
+    hints: [
+      "The publishing of false information that harms a person's reputation.",
+      "A false name used by an author; a pen name.",
+    ],
+    explanation: 'Writing a defamatory falsehood is "libel", prompting the writer to hide under a "pseudonym".',
+  },
+  {
+    id: "ch19-sc2-2",
+    bucket: "Chapter 19",
+    itemNumber: 2,
+    targetWords: ["haughty", "condescend"],
+    part1: "Believing he was better than everyone else at the supermarket, Dan was so ",
+    part2: " that he would rarely ",
+    part3: " to speak to the other cashiers.",
+    hints: [
+      "Proud of one's appearance or accomplishments to the point of looking down on others; arrogant.",
+      "To do something one feels is beneath oneself.",
+    ],
+    explanation: 'Dan was so "haughty" (arrogant) that he refused to "condescend" (lower himself) to chat with coworkers.',
+  },
+  {
+    id: "ch19-sc2-3",
+    bucket: "Chapter 19",
+    itemNumber: 3,
+    targetWords: ["blasé", "redundant"],
+    part1: "The writing teacher had become ",
+    part2: " from repeatedly seeing the same problems: careless organization, lack of focus, and writing so ",
+    part3: " that many sentences said the same thing. In addition, students often turned to plagiarism rather than use their own words.",
+    hints: [
+      "Unexcited or bored about something already experienced repeatedly.",
+      "Wordy or needlessly repetitive.",
+    ],
+    explanation: 'Encountering the same flaws over and over made the teacher "blasé", especially with "redundant" writing.',
+  },
+  {
+    id: "ch19-sc2-4",
+    bucket: "Chapter 19",
+    itemNumber: 4,
+    targetWords: ["comprise", "facade"],
+    part1: "The scenery crew for our theater club ",
+    part2: "(d) three artists and a set designer. They created an intricate ",
+    part3: " of a medieval castle, complete with a carved door, a drawbridge, and a moat.",
+    hints: [
+      "To consist of; include.",
+      "The front of a building.",
+    ],
+    explanation: 'The crew "comprised" four individuals who built the impressive "facade" of a castle.',
+  },
+  {
+    id: "ch19-sc2-5",
+    bucket: "Chapter 19",
+    itemNumber: 5,
+    targetWords: ["glib", "benign"],
+    part1: "At first Joanne thought Barry was too ",
+    part2: ", that his smooth talk was all show. As she got to know him better, however, her perception of him changed. She found that his easy manner reflected a friendly and ",
+    part3: " nature.",
+    hints: [
+      "Characterized by a smooth, easy manner of speaking that often suggests insincerity.",
+      "Kindly; gentle.",
+    ],
+    explanation: 'She initially suspected he was superficially "glib", but discovered his intentions were truly "benign".',
+  },
+];
+
 export const SENTENCE_CHECKS_2: Record<string, SentenceCheck2Item[]> = {
   "Chapter 1": CHAPTER_1_CHECK_2,
   "Chapter 2": CHAPTER_2_CHECK_2,
   "Chapter 3": CHAPTER_3_CHECK_2,
   "Chapter 4": CHAPTER_4_CHECK_2,
   "Chapter 5": CHAPTER_5_CHECK_2,
+  "Chapter 19": CHAPTER_19_CHECK_2,
   "Set 1": CHAPTER_4_CHECK_2, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_2, // Backward compatibility alias
 };
