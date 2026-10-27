@@ -35,9 +35,24 @@ export function useDeck(cardMode: CardMode = "meaning") {
         const csvText = await res.text();
         const baseCards = parseWordsCSV(csvText);
 
-        const customCards = getStoredCustomCards();
+        const rawCustomCards = getStoredCustomCards();
         const savedStarred = getStoredStarredIds();
         const savedBucket = getStoredActiveBucket();
+
+        // Remove any custom cards that have now been officially added to words.csv
+        const baseWordSet = new Set(
+          baseCards.flatMap((c) => {
+            const w = c.word.trim().toLowerCase();
+            return [w, w.replace(/ied$/, "y"), w.replace(/ed$/, "")];
+          })
+        );
+        const customCards = rawCustomCards.filter((c) => {
+          const w = c.word.trim().toLowerCase().split(/\s+/)[0];
+          return !baseWordSet.has(w) && !baseWordSet.has(w.replace(/ied$/, "y"));
+        });
+        if (customCards.length !== rawCustomCards.length) {
+          saveStoredCustomCards(customCards);
+        }
 
         const combined = [...baseCards, ...customCards].map((c) => ({
           ...c,
@@ -53,12 +68,18 @@ export function useDeck(cardMode: CardMode = "meaning") {
           initialBucket = availableBuckets.includes("Chapter 4") ? "Chapter 4" : "Chapter 1";
         } else if (savedBucket === "Set 2" && !availableBuckets.includes("Set 2")) {
           initialBucket = availableBuckets.includes("Chapter 5") ? "Chapter 5" : "Chapter 1";
+        } else if (
+          (savedBucket === "Chapter 6" || savedBucket === "Chapter 7") &&
+          !availableBuckets.includes(savedBucket)
+        ) {
+          initialBucket = availableBuckets.includes("Chapter 20") ? "Chapter 20" : "Chapter 1";
         }
         if (!initialBucket || (!availableBuckets.includes(initialBucket) && initialBucket !== GLOBAL_POOL_BUCKET)) {
           initialBucket = availableBuckets[0] || "Chapter 1";
         }
 
         setActiveBucketState(initialBucket);
+        saveStoredActiveBucket(initialBucket);
       } catch (err) {
         console.error("Error loading words:", err);
       } finally {

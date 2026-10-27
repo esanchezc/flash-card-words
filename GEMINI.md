@@ -37,4 +37,5 @@ Directly models physical handwritten 3x5 index cards:
 - Ingested Chapter 19 vocabulary words (benign, blasé, comprise, condescend, facade, glib, haughty, libel, pseudonym, redundant) from textbook photos into `words.csv` and `public/words.csv` with authentic handwritten Spanish notes and textbook example sentences.
 - Chapter 19 full Sentence Check 1 (10 items) and Sentence Check 2 (5 two-blank pairs) loaded into `src/data/sentenceChecks.ts`.
 - Chapter 19 English Synonyms data added to `src/data/synonyms.ts` with dedicated swap sentences, primary synonyms, and distractors across both `blasé` and `blase`.
+- Ingested Chapter 20 vocabulary words (averse, detract, disdain, divulge, elation, endow, expulsion, mortified, nullified, ominous) into `words.csv`, `public/words.csv`, `src/data/synonyms.ts`, and `src/data/sentenceChecks.ts` (Sentence Check 1 & 2) with automatic cleanup/migration of manual custom entries in `useDeck.ts`.
 - Deployed live to Vercel: https://flashcards-study-english-words.vercel.app

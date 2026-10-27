@@ -640,6 +640,109 @@ const CHAPTER_19_CHECK_1: SentenceCheck1Item[] = [
   },
 ];
 
+const CHAPTER_20_CHECK_1: SentenceCheck1Item[] = [
+  {
+    id: "ch20-sc1-1",
+    bucket: "Chapter 20",
+    itemNumber: 1,
+    sentenceBefore: "The results of the mayoral election were ",
+    targetWord: "nullified",
+    sentenceAfter: " after the townspeople found evidence of voting fraud.",
+    hint: "Canceled; legally invalidated or made ineffective.",
+    explanation: 'Evidence of voting fraud caused the election results to be "nullified" (legally canceled).',
+  },
+  {
+    id: "ch20-sc1-2",
+    bucket: "Chapter 20",
+    itemNumber: 2,
+    sentenceBefore: "When he received the college scholarship, my brother felt such ",
+    targetWord: "elation",
+    sentenceAfter: " that he wept with joy.",
+    hint: "Great happiness and exhilaration; a state of extreme joy.",
+    explanation: 'Winning a scholarship brought him overwhelming "elation" (extreme joy).',
+  },
+  {
+    id: "ch20-sc1-3",
+    bucket: "Chapter 20",
+    itemNumber: 3,
+    sentenceBefore: "I'm ",
+    targetWord: "averse",
+    sentenceAfter: " to speaking in public because I don't enjoy making a fool of myself.",
+    hint: "Having a strong feeling of opposition or dislike; strongly opposed.",
+    explanation: 'Being "averse" to public speaking means strongly disliking or avoiding it.',
+  },
+  {
+    id: "ch20-sc1-4",
+    bucket: "Chapter 20",
+    itemNumber: 4,
+    sentenceBefore: "Because of the dark, ",
+    targetWord: "ominous",
+    sentenceAfter: " storm clouds, we canceled the softball game.",
+    hint: "Threatening harm; giving the impression that something bad is going to happen.",
+    explanation: 'Dark storm clouds look "ominous" because they threaten bad weather ahead.',
+  },
+  {
+    id: "ch20-sc1-5",
+    bucket: "Chapter 20",
+    itemNumber: 5,
+    sentenceBefore: "People talking in a movie theater greatly ",
+    targetWord: "detract",
+    sentenceAfter: " from the enjoyment of watching a film.",
+    hint: "To take away from a particular value or quality; lessen.",
+    explanation: 'Loud talking will "detract" (take away) from everyone\'s enjoyment of the movie.',
+  },
+  {
+    id: "ch20-sc1-6",
+    bucket: "Chapter 20",
+    itemNumber: 6,
+    sentenceBefore: "The reporter was ",
+    targetWord: "mortified",
+    sentenceAfter: " when he learned that he had delivered much of his news story facing away from the TV camera.",
+    hint: "Deeply embarrassed, humiliated, or ashamed.",
+    explanation: 'Realizing he was facing the wrong way on live television left him "mortified" (deeply embarrassed).',
+  },
+  {
+    id: "ch20-sc1-7",
+    bucket: "Chapter 20",
+    itemNumber: 7,
+    sentenceBefore: "Never trust Esta with a secret. She'll ",
+    targetWord: "divulge",
+    sentenceAfter: " it the minute you turn your back.",
+    hint: "To make known or reveal something private or secret.",
+    explanation: 'To "divulge" a secret is to reveal or tell it to others.',
+  },
+  {
+    id: "ch20-sc1-8",
+    bucket: "Chapter 20",
+    itemNumber: 8,
+    sentenceBefore: "Vinnie's repeated boasts about his muscle-building backfired. They caused his date to look at him with ",
+    targetWord: "disdain",
+    sentenceAfter: ", not admiration.",
+    hint: "A feeling of contempt or scorn for someone or something regarded as unworthy.",
+    explanation: 'His bragging caused her to feel "disdain" (scorn and contempt) rather than admiration.',
+  },
+  {
+    id: "ch20-sc1-9",
+    bucket: "Chapter 20",
+    itemNumber: 9,
+    sentenceBefore: "Russian athletes faced ",
+    targetWord: "expulsion",
+    sentenceAfter: " from the Olympics when it was revealed that many were taking illegal drugs to improve their performance.",
+    hint: "The act of forcing someone to leave a place or organization.",
+    explanation: 'Using banned substances led to their "expulsion" (being forced out) from the games.',
+  },
+  {
+    id: "ch20-sc1-10",
+    bucket: "Chapter 20",
+    itemNumber: 10,
+    sentenceBefore: "The American water shrew is ",
+    targetWord: "endow",
+    sentenceAfter: "(e)d with feet that have air pockets, enabling the small animal to walk on water.",
+    hint: "To provide naturally with a quality, ability, or asset.",
+    explanation: 'Nature has "endowed" (equipped or provided) the water shrew with specialized feet.',
+  },
+];
+
 export const SENTENCE_CHECKS_1: Record<string, SentenceCheck1Item[]> = {
   "Chapter 1": CHAPTER_1_CHECK_1,
   "Chapter 2": CHAPTER_2_CHECK_1,
@@ -647,6 +750,8 @@ export const SENTENCE_CHECKS_1: Record<string, SentenceCheck1Item[]> = {
   "Chapter 4": CHAPTER_4_CHECK_1,
   "Chapter 5": CHAPTER_5_CHECK_1,
   "Chapter 19": CHAPTER_19_CHECK_1,
+  "Chapter 20": CHAPTER_20_CHECK_1,
+  "Chapter 6": CHAPTER_20_CHECK_1, // Backward compatibility alias
   "Set 1": CHAPTER_4_CHECK_1, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_1, // Backward compatibility alias
 };
@@ -1090,6 +1195,79 @@ const CHAPTER_19_CHECK_2: SentenceCheck2Item[] = [
   },
 ];
 
+const CHAPTER_20_CHECK_2: SentenceCheck2Item[] = [
+  {
+    id: "ch20-sc2-1",
+    bucket: "Chapter 20",
+    itemNumber: 1,
+    targetWords: ["divulge", "expulsion"],
+    part1: "When someone ",
+    part2: "(e)d to a counselor that a certain student was selling drugs, an investigation began that led to that student's ",
+    part3: " from school.",
+    hints: [
+      "To make known or reveal something private or secret.",
+      "The act of forcing someone to leave a place or organization.",
+    ],
+    explanation: 'Someone "divulged" (revealed) the drug sales, which resulted in the student\'s "expulsion" from school.',
+  },
+  {
+    id: "ch20-sc2-2",
+    bucket: "Chapter 20",
+    itemNumber: 2,
+    targetWords: ["endow", "detract"],
+    part1: "Shannon is ",
+    part2: "(e)d with beautiful curly red hair, but her self-image is so low that she feels her hair ",
+    part3: "s from her looks. However, others find her hair to be one of her many attractive physical attributes.",
+    hints: [
+      "To provide naturally with a quality, ability, or asset.",
+      "To take away from a particular value or quality; lessen.",
+    ],
+    explanation: 'Shannon is naturally "endowed" with curly red hair, though she worries it "detracts" from her appearance.',
+  },
+  {
+    id: "ch20-sc2-3",
+    bucket: "Chapter 20",
+    itemNumber: 3,
+    targetWords: ["averse", "nullified"],
+    part1: "Some people are so ",
+    part2: " to living near a nuclear plant that they want the plant's license to be ",
+    part3: ". They say the plant infringes on a homeowner's right to safety.",
+    hints: [
+      "Having a strong feeling of opposition or dislike; strongly opposed.",
+      "Canceled; legally invalidated or made ineffective.",
+    ],
+    explanation: 'Residents who are "averse" (strongly opposed) to the plant want its operating license "nullified" (canceled).',
+  },
+  {
+    id: "ch20-sc2-4",
+    bucket: "Chapter 20",
+    itemNumber: 4,
+    targetWords: ["ominous", "elation"],
+    part1: "At first, the dark skies and rumbling thunder looked ",
+    part2: " for our graduation ceremony, but when the clouds suddenly cleared, everyone felt pure ",
+    part3: " and celebrated outdoors.",
+    hints: [
+      "Threatening harm; giving the impression that something bad is going to happen.",
+      "Great happiness and exhilaration; a state of extreme joy.",
+    ],
+    explanation: 'The storm clouds looked "ominous" (threatening), before giving way to "elation" (joy) when the sun came out.',
+  },
+  {
+    id: "ch20-sc2-5",
+    bucket: "Chapter 20",
+    itemNumber: 5,
+    targetWords: ["mortified", "disdain"],
+    part1: "The waiter was ",
+    part2: " when he accidentally dropped the tray of drinks, especially when the rude diner looked at him with cold ",
+    part3: " instead of sympathy.",
+    hints: [
+      "Deeply embarrassed, humiliated, or ashamed.",
+      "A feeling of contempt or scorn for someone or something regarded as unworthy.",
+    ],
+    explanation: 'Dropping the tray left the waiter "mortified" (humiliated), while the rude patron reacted with "disdain" (contempt).',
+  },
+];
+
 export const SENTENCE_CHECKS_2: Record<string, SentenceCheck2Item[]> = {
   "Chapter 1": CHAPTER_1_CHECK_2,
   "Chapter 2": CHAPTER_2_CHECK_2,
@@ -1097,6 +1275,8 @@ export const SENTENCE_CHECKS_2: Record<string, SentenceCheck2Item[]> = {
   "Chapter 4": CHAPTER_4_CHECK_2,
   "Chapter 5": CHAPTER_5_CHECK_2,
   "Chapter 19": CHAPTER_19_CHECK_2,
+  "Chapter 20": CHAPTER_20_CHECK_2,
+  "Chapter 6": CHAPTER_20_CHECK_2, // Backward compatibility alias
   "Set 1": CHAPTER_4_CHECK_2, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_2, // Backward compatibility alias
 };

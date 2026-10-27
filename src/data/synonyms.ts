@@ -445,6 +445,92 @@ export const SYNONYMS_DATA: Record<string, SynonymEntry> = {
     distractors: ["concise", "essential", "necessary", "brief"],
     sentence: "The editor cut out redundant paragraphs from the long article.",
   },
+
+  // Chapter 20
+  averse: {
+    word: "averse",
+    primary: "opposed",
+    alternatives: ["reluctant", "unwilling", "disinclined"],
+    distractors: ["eager", "willing", "enthusiastic", "inclined"],
+    sentence: "Many commuters are averse to driving in heavy snowstorms.",
+  },
+  detract: {
+    word: "detract",
+    primary: "take away",
+    alternatives: ["diminish", "lessen", "reduce"],
+    distractors: ["enhance", "increase", "improve", "boost"],
+    sentence: "A few small scratches do not detract from the beauty of the antique table.",
+  },
+  disdain: {
+    word: "disdain",
+    primary: "contempt",
+    alternatives: ["scorn", "disrespect", "derision"],
+    distractors: ["admiration", "respect", "praise", "affection"],
+    sentence: "The critic expressed open disdain for the poorly written sequel.",
+  },
+  divulge: {
+    word: "divulge",
+    primary: "reveal",
+    alternatives: ["disclose", "tell", "expose", "uncover"],
+    distractors: ["conceal", "hide", "suppress", "keep secret"],
+    sentence: "The journalist refused to divulge the name of her confidential source.",
+  },
+  elation: {
+    word: "elation",
+    primary: "joy",
+    alternatives: ["euphoria", "delight", "exhilaration", "bliss"],
+    distractors: ["misery", "sorrow", "despair", "grief"],
+    sentence: "The championship team celebrated their victory with pure elation.",
+  },
+  endow: {
+    word: "endow",
+    primary: "bless",
+    alternatives: ["provide", "gift", "equip", "grant"],
+    distractors: ["deprive", "strip", "deny", "withhold"],
+    sentence: "Nature seemed to endow the young singer with extraordinary vocal talent.",
+  },
+  expulsion: {
+    word: "expulsion",
+    primary: "removal",
+    alternatives: ["banishment", "dismissal", "ouster", "ejection"],
+    distractors: ["admission", "inclusion", "welcome", "acceptance"],
+    sentence: "Cheating on the final exam resulted in his immediate expulsion from the academy.",
+  },
+  mortified: {
+    word: "mortified",
+    primary: "humiliated",
+    alternatives: ["embarrassed", "ashamed"],
+    distractors: ["proud", "confident", "honored", "flattered"],
+    sentence: "The actor was mortified when he forgot his lines in front of the live audience.",
+  },
+  mortify: {
+    word: "mortified",
+    primary: "humiliated",
+    alternatives: ["embarrassed", "ashamed"],
+    distractors: ["proud", "confident", "honored", "flattered"],
+    sentence: "The actor was mortified when he forgot his lines in front of the live audience.",
+  },
+  nullified: {
+    word: "nullified",
+    primary: "canceled",
+    alternatives: ["invalidated", "voided", "annulled", "revoked"],
+    distractors: ["approved", "validated", "confirmed", "ratified"],
+    sentence: "The judge declared that the unfair contract was officially nullified.",
+  },
+  nullify: {
+    word: "nullified",
+    primary: "canceled",
+    alternatives: ["invalidated", "voided", "annulled", "revoked"],
+    distractors: ["approved", "validated", "confirmed", "ratified"],
+    sentence: "The judge declared that the unfair contract was officially nullified.",
+  },
+  ominous: {
+    word: "ominous",
+    primary: "threatening",
+    alternatives: ["menacing", "foreboding", "sinister"],
+    distractors: ["promising", "encouraging", "favorable", "comforting"],
+    sentence: "A low, ominous rumble of thunder warned the hikers to seek shelter.",
+  },
 };
 
 /**
