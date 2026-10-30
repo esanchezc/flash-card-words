@@ -531,6 +531,78 @@ export const SYNONYMS_DATA: Record<string, SynonymEntry> = {
     distractors: ["promising", "encouraging", "favorable", "comforting"],
     sentence: "A low, ominous rumble of thunder warned the hikers to seek shelter.",
   },
+
+  // Chapter 21
+  credible: {
+    word: "credible",
+    primary: "believable",
+    alternatives: ["plausible", "convincing", "trustworthy"],
+    distractors: ["unbelievable", "implausible", "doubtful", "suspicious"],
+    sentence: "Some jurors doubted the witness's testimony, but most of them found it credible.",
+  },
+  cursory: {
+    word: "cursory",
+    primary: "hasty",
+    alternatives: ["quick", "superficial", "hurried", "brief"],
+    distractors: ["thorough", "careful", "detailed", "meticulous"],
+    sentence: "He had only enough time to give his apartment a cursory cleaning before his parents arrived.",
+  },
+  designate: {
+    word: "designate",
+    primary: "appoint",
+    alternatives: ["assign", "name", "select", "nominate"],
+    distractors: ["dismiss", "reject", "forbid", "discharge"],
+    sentence: "The committee will designate a spokesperson to present the award at the banquet.",
+  },
+  deviate: {
+    word: "deviate",
+    primary: "stray",
+    alternatives: ["depart", "diverge", "veer", "turn aside"],
+    distractors: ["conform", "follow", "adhere", "continue"],
+    sentence: "If you deviate from the instructions when writing your paper, you might hurt your grade.",
+  },
+  improvise: {
+    word: "improvise",
+    primary: "invent",
+    alternatives: ["make up", "concoct", "extemporize", "ad-lib"],
+    distractors: ["rehearse", "memorize", "plan", "recite"],
+    sentence: "When the actor forgot his lines, he had to quickly improvise some dialogue.",
+  },
+  interim: {
+    word: "interim",
+    primary: "meantime",
+    alternatives: ["interval", "interlude", "time between"],
+    distractors: ["eternity", "permanence", "conclusion", "beginning"],
+    sentence: "Corey had to wait two hours for the test results; in the interim, he paced the hallway.",
+  },
+  latent: {
+    word: "latent",
+    primary: "dormant",
+    alternatives: ["inactive", "hidden", "concealed", "unseen"],
+    distractors: ["active", "obvious", "visible", "apparent"],
+    sentence: "After he retired, my father discovered his latent artistic talent for oil painting.",
+  },
+  secular: {
+    word: "secular",
+    primary: "nonreligious",
+    alternatives: ["worldly", "civil", "temporal"],
+    distractors: ["religious", "spiritual", "sacred", "divine"],
+    sentence: "The choir is known for its gospel music, but it also performs secular songs.",
+  },
+  shun: {
+    word: "shun",
+    primary: "avoid",
+    alternatives: ["evade", "eschew", "keep away from", "snub"],
+    distractors: ["embrace", "welcome", "seek", "accept"],
+    sentence: "To overcome his addiction, Tony had to shun people and places that tempted him.",
+  },
+  simulate: {
+    word: "simulate",
+    primary: "imitate",
+    alternatives: ["replicate", "mimic", "reproduce", "copy"],
+    distractors: ["expose", "contrast", "destroy", "differ"],
+    sentence: "The zoo's exhibits simulate the natural rainforest environments of the animals.",
+  },
 };
 
 /**

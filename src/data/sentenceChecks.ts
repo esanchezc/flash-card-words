@@ -746,6 +746,109 @@ const CHAPTER_20_CHECK_1: SentenceCheck1Item[] = [
   },
 ];
 
+const CHAPTER_21_CHECK_1: SentenceCheck1Item[] = [
+  {
+    id: "ch21-sc1-1",
+    bucket: "Chapter 21",
+    itemNumber: 1,
+    sentenceBefore: "In the ",
+    targetWord: "interim",
+    sentenceAfter: " between applying to college and getting the letter of acceptance, I spent a lot of time worrying.",
+    hint: "The period of time in between; meantime.",
+    explanation: 'The "interim" is the intervening period of time (meantime) between applying and receiving the acceptance letter.',
+  },
+  {
+    id: "ch21-sc1-2",
+    bucket: "Chapter 21",
+    itemNumber: 2,
+    sentenceBefore: "Because his story about a flat tire sounded ",
+    targetWord: "credible",
+    sentenceAfter: ", my parents allowed the stranger to use our telephone.",
+    hint: "Believable.",
+    explanation: 'His explanation sounded "credible" (believable and trustworthy), so they let him use the phone.',
+  },
+  {
+    id: "ch21-sc1-3",
+    bucket: "Chapter 21",
+    itemNumber: 3,
+    sentenceBefore: "I hear Andy dropped out of college. What caused him to ",
+    targetWord: "deviate",
+    sentenceAfter: " from his plan of getting his degree?",
+    hint: "To turn aside or stray, as from a path, direction, or standard.",
+    explanation: 'Dropping out meant he chose to "deviate" (depart or stray) from his original academic plan.',
+  },
+  {
+    id: "ch21-sc1-4",
+    bucket: "Chapter 21",
+    itemNumber: 4,
+    sentenceBefore: "Presidents ",
+    targetWord: "designate",
+    sentenceAfter: " as Supreme Court justices people who share their political views.",
+    hint: "To name to an office or duty; appoint.",
+    explanation: 'Presidents "designate" (appoint or name) judges to serve on the Supreme Court.',
+  },
+  {
+    id: "ch21-sc1-5",
+    bucket: "Chapter 21",
+    itemNumber: 5,
+    sentenceBefore: "Nikki's ",
+    targetWord: "latent",
+    sentenceAfter: " ability in basketball became apparent when she turned twelve. Her movements had once been clumsy, but now they were smooth and controlled.",
+    hint: "Present but hidden or inactive.",
+    explanation: 'Her talent had been "latent" (present but hidden or dormant) until it emerged at age twelve.',
+  },
+  {
+    id: "ch21-sc1-6",
+    bucket: "Chapter 21",
+    itemNumber: 6,
+    sentenceBefore: "The zoo's exhibits ",
+    targetWord: "simulate",
+    sentenceAfter: " the natural environments of animals. The orangutans, for example, live in a space that looks like an Asian rain forest.",
+    hint: "To act or look like; imitate.",
+    explanation: 'The habitats are designed to "simulate" (imitate or replicate) the animals\' wild environments.',
+  },
+  {
+    id: "ch21-sc1-7",
+    bucket: "Chapter 21",
+    itemNumber: 7,
+    sentenceBefore: "Tony found the hardest part of overcoming his addiction was learning to ",
+    targetWord: "shun",
+    sentenceAfter: " people and places that would tempt him to use drugs again.",
+    hint: "To keep away from; avoid consistently.",
+    explanation: 'Staying sober required him to "shun" (deliberately avoid and keep away from) former temptations.',
+  },
+  {
+    id: "ch21-sc1-8",
+    bucket: "Chapter 21",
+    itemNumber: 8,
+    sentenceBefore: "When the actor forgot his lines, he was forced to ",
+    targetWord: "improvise",
+    sentenceAfter: " some dialogue until the stage manager whispered to him from offstage.",
+    hint: "To compose, perform, or provide without preparation; invent.",
+    explanation: 'Forgetting his script forced the actor to "improvise" (make up lines on the spot).',
+  },
+  {
+    id: "ch21-sc1-9",
+    bucket: "Chapter 21",
+    itemNumber: 9,
+    sentenceBefore: "The chorus is known for its gospel music, but it also performs ",
+    targetWord: "secular",
+    sentenceAfter: " compositions, including show tunes.",
+    hint: "Not directly related to religion; not spiritual; worldly.",
+    explanation: 'Unlike religious gospel music, show tunes are "secular" (nonreligious) compositions.',
+  },
+  {
+    id: "ch21-sc1-10",
+    bucket: "Chapter 21",
+    itemNumber: 10,
+    sentenceBefore: "Margo couldn't identify the driver of the car that had hit her. She'd given him only a(n) ",
+    targetWord: "cursory",
+    sentenceAfter: " glance at the time of the accident.",
+    hint: "Done quickly and without attention to detail.",
+    explanation: 'A "cursory" (quick, hasty) glance wasn\'t detailed enough to recognize the driver.',
+  },
+];
+
 export const SENTENCE_CHECKS_1: Record<string, SentenceCheck1Item[]> = {
   "Chapter 1": CHAPTER_1_CHECK_1,
   "Chapter 2": CHAPTER_2_CHECK_1,
@@ -754,6 +857,7 @@ export const SENTENCE_CHECKS_1: Record<string, SentenceCheck1Item[]> = {
   "Chapter 5": CHAPTER_5_CHECK_1,
   "Chapter 19": CHAPTER_19_CHECK_1,
   "Chapter 20": CHAPTER_20_CHECK_1,
+  "Chapter 21": CHAPTER_21_CHECK_1,
   "Chapter 6": CHAPTER_20_CHECK_1, // Backward compatibility alias
   "Set 1": CHAPTER_4_CHECK_1, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_1, // Backward compatibility alias
@@ -1271,6 +1375,79 @@ const CHAPTER_20_CHECK_2: SentenceCheck2Item[] = [
   },
 ];
 
+const CHAPTER_21_CHECK_2: SentenceCheck2Item[] = [
+  {
+    id: "ch21-sc2-1",
+    bucket: "Chapter 21",
+    itemNumber: 1,
+    targetWords: ["cursory", "secular"],
+    part1: "In looking for a college, Luke gave only ",
+    part2: " attention to ",
+    part3: " schools. He was quite sure he wanted to attend a Catholic school.",
+    hints: [
+      "Done quickly and without attention to detail.",
+      "Not directly related to religion; not spiritual; worldly.",
+    ],
+    explanation: 'Because he wanted a Catholic college, Luke gave only "cursory" (brief, hasty) attention to "secular" (nonreligious) schools.',
+  },
+  {
+    id: "ch21-sc2-2",
+    bucket: "Chapter 21",
+    itemNumber: 2,
+    targetWords: ["interim", "latent"],
+    part1: "In seventh grade, Jack looked upon girls with great disdain. Then, in the ",
+    part2: " between seventh and eighth grades, his ",
+    part3: " interest in them suddenly surfaced.",
+    hints: [
+      "The period of time in between; meantime.",
+      "Present but hidden or inactive.",
+    ],
+    explanation: 'During the "interim" (time in between) grades, Jack\'s previously "latent" (dormant/hidden) interest surfaced.',
+  },
+  {
+    id: "ch21-sc2-3",
+    bucket: "Chapter 21",
+    itemNumber: 3,
+    targetWords: ["shun", "improvise"],
+    part1: "Proud of his ability to create new dishes, Franco tended to ",
+    part2: " cookbooks. He preferred to ",
+    part3: " meals, using whatever ingredients happened to be on hand. In fact, cooking was one of his favorite diversions.",
+    hints: [
+      "To keep away from; avoid consistently.",
+      "To compose, perform, or provide without preparation; invent.",
+    ],
+    explanation: 'Franco liked to "shun" (avoid) recipe books and instead "improvise" (invent) dishes from scratch.',
+  },
+  {
+    id: "ch21-sc2-4",
+    bucket: "Chapter 21",
+    itemNumber: 4,
+    targetWords: ["deviate", "designate"],
+    part1: "Della wanted to be a cheerleader, but she willingly ",
+    part2: "(e)d from that goal when she was ",
+    part3: "(e)d class mascot and got to wear a polar bear costume to all the games.",
+    hints: [
+      "To turn aside or stray, as from a path, direction, or standard.",
+      "To name to an office or duty; appoint.",
+    ],
+    explanation: 'She happily "deviated" (turned aside) from her cheerleading goal after being "designated" (appointed) class mascot.',
+  },
+  {
+    id: "ch21-sc2-5",
+    bucket: "Chapter 21",
+    itemNumber: 5,
+    targetWords: ["credible", "simulate"],
+    part1: "Matt told his mother he was late because he had fallen while running home. To make his story more ",
+    part2: ", he had scratched his knee with a rock to ",
+    part3: " an injury from a fall.",
+    hints: [
+      "Believable.",
+      "To act or look like; imitate.",
+    ],
+    explanation: 'To make his excuse seem "credible" (believable), he scratched his knee to "simulate" (imitate) a fall injury.',
+  },
+];
+
 export const SENTENCE_CHECKS_2: Record<string, SentenceCheck2Item[]> = {
   "Chapter 1": CHAPTER_1_CHECK_2,
   "Chapter 2": CHAPTER_2_CHECK_2,
@@ -1279,6 +1456,7 @@ export const SENTENCE_CHECKS_2: Record<string, SentenceCheck2Item[]> = {
   "Chapter 5": CHAPTER_5_CHECK_2,
   "Chapter 19": CHAPTER_19_CHECK_2,
   "Chapter 20": CHAPTER_20_CHECK_2,
+  "Chapter 21": CHAPTER_21_CHECK_2,
   "Chapter 6": CHAPTER_20_CHECK_2, // Backward compatibility alias
   "Set 1": CHAPTER_4_CHECK_2, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_2, // Backward compatibility alias
