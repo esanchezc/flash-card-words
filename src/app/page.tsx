@@ -9,7 +9,10 @@ import { NewBucketModal } from "@/components/NewBucketModal";
 import { SessionComplete } from "@/components/SessionComplete";
 import { SentenceCheck1 } from "@/components/SentenceCheck1";
 import { SentenceCheck2 } from "@/components/SentenceCheck2";
-import { SENTENCE_CHECKS_1, SENTENCE_CHECKS_2 } from "@/data/sentenceChecks";
+import {
+  getSentenceCheck1Items,
+  getSentenceCheck2Items,
+} from "@/data/sentenceChecks";
 import { Loader2, Plus, Sparkles } from "lucide-react";
 import { Language, translations } from "@/lib/i18n";
 import { getStoredLanguage, saveStoredLanguage } from "@/lib/storage";
@@ -89,8 +92,8 @@ export default function Home() {
       ? "Chapter 1"
       : activeBucket;
 
-  const check1Items = SENTENCE_CHECKS_1[activeSetKey] || [];
-  const check2Items = SENTENCE_CHECKS_2[activeSetKey] || [];
+  const check1Items = getSentenceCheck1Items(activeSetKey, currentBucketCards);
+  const check2Items = getSentenceCheck2Items(activeSetKey, currentBucketCards);
 
   const setWords = currentBucketCards.map((c) => c.word);
   const displayWords =
@@ -192,6 +195,7 @@ export default function Home() {
         ) : activeMode === "check1" ? (
           <div className="w-full my-auto py-2">
             <SentenceCheck1
+              key={activeSetKey}
               items={check1Items}
               allSetWords={displayWords}
               bucketName={activeSetKey}
@@ -202,6 +206,7 @@ export default function Home() {
         ) : activeMode === "check2" ? (
           <div className="w-full my-auto py-2">
             <SentenceCheck2
+              key={activeSetKey}
               items={check2Items}
               allSetWords={displayWords}
               bucketName={activeSetKey}

@@ -536,7 +536,7 @@ export const SYNONYMS_DATA: Record<string, SynonymEntry> = {
 /**
  * Fallback pool of general English distractors for unknown/custom words.
  */
-const GENERAL_SYNONYM_DISTRACTORS = [
+export const GENERAL_SYNONYM_DISTRACTORS = [
   "harmonious",
   "hesitant",
   "temporary",
@@ -551,9 +551,31 @@ const GENERAL_SYNONYM_DISTRACTORS = [
   "superficial",
 ];
 
+// Runtime registry of auto-enriched custom synonyms (synced with localStorage)
+const customSynonymsStore: Record<string, SynonymEntry> = {};
+
+export function registerCustomSynonyms(
+  entries: Record<string, SynonymEntry>
+): void {
+  Object.entries(entries).forEach(([key, val]) => {
+    if (key && val) {
+      customSynonymsStore[key.trim().toLowerCase()] = val;
+    }
+  });
+}
+
 export interface SynonymQuizOption {
   text: string;
   isCorrect: boolean;
+}
+
+/**
+ * Retrieves the synonym entry for a given word if known (built-in or auto-enriched).
+ */
+export function getSynonymEntry(word: string): SynonymEntry | undefined {
+  if (!word) return undefined;
+  const normalized = word.trim().toLowerCase();
+  return SYNONYMS_DATA[normalized] || customSynonymsStore[normalized];
 }
 
 /**
@@ -563,8 +585,7 @@ export function getSynonymQuizOptions(
   targetWord: string,
   definitionFallback?: string
 ): SynonymQuizOption[] {
-  const normalized = targetWord.trim().toLowerCase();
-  const entry = SYNONYMS_DATA[normalized];
+  const entry = getSynonymEntry(targetWord);
 
   let correctText = "";
   let distractorText = "";
@@ -595,10 +616,14 @@ export function getSynonymQuizOptions(
     }
   } else {
     // Custom/unknown word fallback:
-    // Extract first 1-2 words of definition or use first noun/adjective
-    const cleanDef = (definitionFallback || "").replace(/^(to|a|an|the)\s+/i, "");
-    const firstDefWord = cleanDef.split(/[\s,;.]+/)[0] || targetWord;
-    correctText = firstDefWord.toLowerCase();
+    const cleanDef = (definitionFallback || "")
+      .replace(/^\([^)]+\)\s*/g, "")
+      .replace(/^(to|a|an|the|of|in|for|by|with|being)\s+/i, "");
+    const firstClause = cleanDef.split(/[;,.]+/)[0]?.trim() || "";
+    const words = firstClause.split(/\s+/).filter(Boolean);
+    correctText =
+      (words.length <= 2 ? firstClause : words.slice(0, 2).join(" ")).toLowerCase() ||
+      targetWord.toLowerCase();
 
     const pool = GENERAL_SYNONYM_DISTRACTORS.filter(
       (d) => d.toLowerCase() !== correctText.toLowerCase()
@@ -615,11 +640,8 @@ export function getSynonymQuizOptions(
   return Math.random() > 0.5 ? options : [options[1], options[0]];
 }
 
-/**
- * Retrieves the synonym entry for a given word if known.
- */
-export function getSynonymEntry(word: string): SynonymEntry | undefined {
-  return SYNONYMS_DATA[word.trim().toLowerCase()];
+function escapeRegExp(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
 /**
@@ -631,8 +653,14 @@ export function getSwappedSentence(
   synonym: string
 ): string {
   if (!sentence || !targetWord || !synonym) return sentence;
-  const regex = new RegExp(`\\b${targetWord}\\b`, "i");
-  return sentence.replace(regex, synonym);
+  const escaped = escapeRegExp(targetWord.trim());
+  const exactRegex = new RegExp(`\\b${escaped}\\b`, "i");
+  if (exactRegex.test(sentence)) {
+    return sentence.replace(exactRegex, synonym);
+  }
+  const stem = escaped.replace(/e$/i, "");
+  const inflectedRegex = new RegExp(`\\b${stem}(?:e?s|e?d|ing)?\\b`, "i");
+  return sentence.replace(inflectedRegex, synonym);
 }
 
 /**
@@ -643,8 +671,14 @@ export function splitSentenceForHighlight(
   targetWord: string
 ): { before: string; match: string; after: string } | null {
   if (!sentence || !targetWord) return null;
-  const regex = new RegExp(`(\\b${targetWord}\\b)`, "i");
-  const parts = sentence.split(regex);
+  const escaped = escapeRegExp(targetWord.trim());
+  const exactRegex = new RegExp(`(\\b${escaped}\\b)`, "i");
+  let parts = sentence.split(exactRegex);
+  if (parts.length < 3) {
+    const stem = escaped.replace(/e$/i, "");
+    const inflectedRegex = new RegExp(`(\\b${stem}(?:e?s|e?d|ing)?\\b)`, "i");
+    parts = sentence.split(inflectedRegex);
+  }
   if (parts.length >= 3) {
     return {
       before: parts[0],

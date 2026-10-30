@@ -6,11 +6,14 @@ import { parseWordsCSV, exportWordsToCSV } from "@/lib/csvParser";
 import {
   getStoredCustomCards,
   saveStoredCustomCards,
+  getStoredCustomSynonyms,
   getStoredStarredIds,
   saveStoredStarredIds,
   getStoredActiveBucket,
   saveStoredActiveBucket,
 } from "@/lib/storage";
+import { registerCustomSynonyms } from "@/data/synonyms";
+import { enrichCustomCards } from "@/lib/autoEnrich";
 
 export const GLOBAL_POOL_BUCKET = "__GLOBAL_POOL__";
 
@@ -38,6 +41,7 @@ export function useDeck(cardMode: CardMode = "meaning") {
         const rawCustomCards = getStoredCustomCards();
         const savedStarred = getStoredStarredIds();
         const savedBucket = getStoredActiveBucket();
+        registerCustomSynonyms(getStoredCustomSynonyms());
 
         // Remove any custom cards that have now been officially added to words.csv
         const baseWordSet = new Set(
@@ -80,6 +84,21 @@ export function useDeck(cardMode: CardMode = "meaning") {
 
         setActiveBucketState(initialBucket);
         saveStoredActiveBucket(initialBucket);
+
+        // Background auto-enrich any custom cards missing definitions, examples, or synonyms
+        if (customCards.length > 0) {
+          enrichCustomCards(customCards).then((enrichedCustom) => {
+            const enrichedMap = new Map(enrichedCustom.map((c) => [c.id, c]));
+            const applyEnriched = (list: FlashCard[]) =>
+              list.map((c) => {
+                const updated = enrichedMap.get(c.id);
+                return updated ? { ...updated, starred: c.starred } : c;
+              });
+            setAllCards(applyEnriched);
+            setMeaningQueue(applyEnriched);
+            setSynonymsQueue(applyEnriched);
+          });
+        }
       } catch (err) {
         console.error("Error loading words:", err);
       } finally {
@@ -250,6 +269,19 @@ export function useDeck(cardMode: CardMode = "meaning") {
 
       setAllCards((prev) => [...prev, ...createdCards]);
       setActiveBucket(trimmedBucket);
+
+      // Automatically enrich newly added custom words (definitions, examples, synonyms)
+      enrichCustomCards(updatedCustom).then((enrichedCustom) => {
+        const enrichedMap = new Map(enrichedCustom.map((c) => [c.id, c]));
+        const applyEnriched = (list: FlashCard[]) =>
+          list.map((c) => {
+            const updated = enrichedMap.get(c.id);
+            return updated ? { ...updated, starred: c.starred } : c;
+          });
+        setAllCards(applyEnriched);
+        setMeaningQueue(applyEnriched);
+        setSynonymsQueue(applyEnriched);
+      });
     },
     [setActiveBucket]
   );

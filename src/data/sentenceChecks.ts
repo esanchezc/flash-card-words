@@ -1,3 +1,6 @@
+import { FlashCard } from "@/types/card";
+import { getSynonymEntry, splitSentenceForHighlight } from "@/data/synonyms";
+
 export interface SentenceCheck1Item {
   id: string;
   bucket: string;
@@ -1280,3 +1283,108 @@ export const SENTENCE_CHECKS_2: Record<string, SentenceCheck2Item[]> = {
   "Set 1": CHAPTER_4_CHECK_2, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_2, // Backward compatibility alias
 };
+
+function splitCardSentence(card: FlashCard): {
+  before: string;
+  after: string;
+  hint: string;
+} {
+  const synEntry = getSynonymEntry(card.word);
+  const rawSentence =
+    card.example?.trim() ||
+    synEntry?.sentence ||
+    `In this context, the word ${card.word} means ${card.definition || card.translation || "something notable"}.`;
+
+  const split = splitSentenceForHighlight(rawSentence, card.word);
+  const hint =
+    card.definition?.trim() ||
+    (synEntry?.primary
+      ? `Synonym: ${[synEntry.primary, ...(synEntry.alternatives || []).slice(0, 1)].join(", ")}`
+      : card.translation || "Select the matching vocabulary word.");
+
+  if (split) {
+    return {
+      before: split.before,
+      after: split.after,
+      hint,
+    };
+  }
+
+  return {
+    before: "In this situation, ",
+    after: ` best fits the meaning "${hint}".`,
+    hint,
+  };
+}
+
+/**
+ * Returns static Sentence Check 1 items when available, or deterministically
+ * generates single-blank items from the bucket's cards (no LLM required).
+ */
+export function getSentenceCheck1Items(
+  bucketKey: string,
+  bucketCards: FlashCard[]
+): SentenceCheck1Item[] {
+  const staticItems = SENTENCE_CHECKS_1[bucketKey];
+  if (staticItems && staticItems.length > 0) {
+    return staticItems;
+  }
+
+  return bucketCards.map((card, idx) => {
+    const { before, after, hint } = splitCardSentence(card);
+    return {
+      id: `custom-${bucketKey}-sc1-${idx + 1}`,
+      bucket: bucketKey,
+      itemNumber: idx + 1,
+      sentenceBefore: before,
+      targetWord: card.word,
+      sentenceAfter: after,
+      hint,
+      explanation: `"${card.word}" means: ${hint}`,
+    };
+  });
+}
+
+/**
+ * Returns static Sentence Check 2 items when available, or deterministically
+ * pairs consecutive cards in the bucket into 2-blank exercises.
+ */
+export function getSentenceCheck2Items(
+  bucketKey: string,
+  bucketCards: FlashCard[]
+): SentenceCheck2Item[] {
+  const staticItems = SENTENCE_CHECKS_2[bucketKey];
+  if (staticItems && staticItems.length > 0) {
+    return staticItems;
+  }
+
+  const items: SentenceCheck2Item[] = [];
+  for (let i = 0; i + 1 < bucketCards.length; i += 2) {
+    const cardA = bucketCards[i];
+    const cardB = bucketCards[i + 1];
+    const splitA = splitCardSentence(cardA);
+    const splitB = splitCardSentence(cardB);
+
+    const aAfterTrimmed = splitA.after.trim();
+    const connector =
+      aAfterTrimmed.endsWith(".") ||
+      aAfterTrimmed.endsWith("!") ||
+      aAfterTrimmed.endsWith("?")
+        ? `${splitA.after} Furthermore, ${splitB.before.charAt(0).toLowerCase()}${splitB.before.slice(1)}`
+        : `${splitA.after}. Furthermore, ${splitB.before.charAt(0).toLowerCase()}${splitB.before.slice(1)}`;
+
+    items.push({
+      id: `custom-${bucketKey}-sc2-${Math.floor(i / 2) + 1}`,
+      bucket: bucketKey,
+      itemNumber: Math.floor(i / 2) + 1,
+      targetWords: [cardA.word, cardB.word],
+      part1: splitA.before,
+      part2: connector,
+      part3: splitB.after,
+      hints: [splitA.hint, splitB.hint],
+      explanation: `"${cardA.word}" (${splitA.hint}) and "${cardB.word}" (${splitB.hint}).`,
+    });
+  }
+
+  return items;
+}

@@ -1,12 +1,36 @@
 import { FlashCard } from "@/types/card";
+import { SynonymEntry } from "@/data/synonyms";
 
 const STORAGE_KEYS = {
   CUSTOM_CARDS: "flashcards_custom_cards",
+  CUSTOM_SYNONYMS: "flashcards_custom_synonyms",
   STARRED_IDS: "flashcards_starred_ids",
   ACTIVE_BUCKET: "flashcards_active_bucket",
   MASTERED_IDS: "flashcards_mastered_ids",
   LANGUAGE: "flashcards_language",
 };
+
+export function getStoredCustomSynonyms(): Record<string, SynonymEntry> {
+  if (typeof window === "undefined") return {};
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.CUSTOM_SYNONYMS);
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    console.error("Failed to load custom synonyms from localStorage", e);
+    return {};
+  }
+}
+
+export function saveStoredCustomSynonyms(
+  synonyms: Record<string, SynonymEntry>
+): void {
+  if (typeof window === "undefined") return;
+  try {
+    localStorage.setItem(STORAGE_KEYS.CUSTOM_SYNONYMS, JSON.stringify(synonyms));
+  } catch (e) {
+    console.error("Failed to save custom synonyms to localStorage", e);
+  }
+}
 
 export function getStoredCustomCards(): FlashCard[] {
   if (typeof window === "undefined") return [];
