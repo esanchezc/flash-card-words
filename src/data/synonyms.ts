@@ -603,6 +603,78 @@ export const SYNONYMS_DATA: Record<string, SynonymEntry> = {
     distractors: ["expose", "contrast", "destroy", "differ"],
     sentence: "The zoo's exhibits simulate the natural rainforest environments of the animals.",
   },
+
+  // Chapter 22
+  commemorate: {
+    word: "commemorate",
+    primary: "celebrate",
+    alternatives: ["honor", "observe", "memorialize"],
+    distractors: ["forget", "ignore", "disregard", "neglect"],
+    sentence: "Each year, my parents commemorate their first date by having dinner at the place where they met.",
+  },
+  complacent: {
+    word: "complacent",
+    primary: "self-satisfied",
+    alternatives: ["smug", "unconcerned", "too much at ease"],
+    distractors: ["ambitious", "eager", "driven", "attentive"],
+    sentence: "Getting all A's hasn't made Ivy complacent; she continues to study hard.",
+  },
+  consensus: {
+    word: "consensus",
+    primary: "agreement",
+    alternatives: ["majority view", "accord", "harmony", "unanimity"],
+    distractors: ["disagreement", "conflict", "dispute", "division"],
+    sentence: "The family consensus was that we should go camping again this summer.",
+  },
+  deplete: {
+    word: "deplete",
+    primary: "exhaust",
+    alternatives: ["use up", "drain", "consume", "empty"],
+    distractors: ["replenish", "restore", "increase", "fill"],
+    sentence: "Unexpected car repairs have managed to deplete my savings account.",
+  },
+  diligent: {
+    word: "diligent",
+    primary: "hard-working",
+    alternatives: ["industrious", "conscientious", "assiduous", "dedicated"],
+    distractors: ["lazy", "careless", "negligent", "idle"],
+    sentence: "George is a diligent chef who is constantly working to improve his skills.",
+  },
+  empathy: {
+    word: "empathy",
+    primary: "compassion",
+    alternatives: ["sympathetic understanding", "sensitivity", "rapport"],
+    distractors: ["apathy", "indifference", "coldness", "disdain"],
+    sentence: "Ms. Allan is an excellent counselor because of her deep empathy for students.",
+  },
+  menial: {
+    word: "menial",
+    primary: "unskilled",
+    alternatives: ["lowly", "humble", "routine"],
+    distractors: ["skilled", "prestigious", "specialized", "dignified"],
+    sentence: "Even menial jobs such as washing windows or scrubbing floors can be performed with pride.",
+  },
+  niche: {
+    word: "niche",
+    primary: "calling",
+    alternatives: ["suitable place", "ideal role", "vocation"],
+    distractors: ["mismatch", "obstacle", "weakness", "burden"],
+    sentence: "After moving from job to job, Dom finally found a comfortable niche for himself.",
+  },
+  transcend: {
+    word: "transcend",
+    primary: "exceed",
+    alternatives: ["surpass", "rise above", "go beyond", "outshine"],
+    distractors: ["fall short", "trail", "fail", "succumb"],
+    sentence: "Yoga can help one transcend the cares of the world and reach a state of peace.",
+  },
+  waive: {
+    word: "waive",
+    primary: "give up",
+    alternatives: ["forgo", "relinquish", "renounce", "surrender"],
+    distractors: ["claim", "demand", "enforce", "retain"],
+    sentence: "The defendant decided to waive his right to an attorney and speak for himself.",
+  },
 };
 
 /**

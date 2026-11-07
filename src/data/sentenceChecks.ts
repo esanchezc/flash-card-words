@@ -849,6 +849,109 @@ const CHAPTER_21_CHECK_1: SentenceCheck1Item[] = [
   },
 ];
 
+const CHAPTER_22_CHECK_1: SentenceCheck1Item[] = [
+  {
+    id: "ch22-sc1-1",
+    bucket: "Chapter 22",
+    itemNumber: 1,
+    sentenceBefore: "The hair salon got off to a good start, but then the owners became ",
+    targetWord: "complacent",
+    sentenceAfter: " about their success and stopped trying to attract new customers.",
+    hint: "Self-satisfied; feeling too much satisfaction with oneself or one's accomplishments.",
+    explanation: 'Becoming "complacent" (too self-satisfied and comfortable) caused the owners to stop putting in effort.',
+  },
+  {
+    id: "ch22-sc1-2",
+    bucket: "Chapter 22",
+    itemNumber: 2,
+    sentenceBefore: "Many people believe that Shakespeare's works ",
+    targetWord: "transcend",
+    sentenceAfter: " those of all other authors.",
+    hint: "To rise above or go beyond the limits of; exceed.",
+    explanation: 'To "transcend" other authors\' works means to rise above and surpass them.',
+  },
+  {
+    id: "ch22-sc1-3",
+    bucket: "Chapter 22",
+    itemNumber: 3,
+    sentenceBefore: "My grandfather, who's recovering from heart surgery, is weak, so it doesn't take much effort for him to ",
+    targetWord: "deplete",
+    sentenceAfter: " the little energy he has.",
+    hint: "To use up.",
+    explanation: 'When recovering from surgery, even small efforts quickly "deplete" (use up or exhaust) his energy.',
+  },
+  {
+    id: "ch22-sc1-4",
+    bucket: "Chapter 22",
+    itemNumber: 4,
+    sentenceBefore: "The American Inventors' Association gathered at a banquet to ",
+    targetWord: "commemorate",
+    sentenceAfter: " Thomas Edison.",
+    hint: "To honor the memory of someone or something, as with a ceremony; celebrate; observe.",
+    explanation: 'They held a banquet to "commemorate" (honor the memory of and celebrate) Thomas Edison.',
+  },
+  {
+    id: "ch22-sc1-5",
+    bucket: "Chapter 22",
+    itemNumber: 5,
+    sentenceBefore: "The old man decided to ",
+    targetWord: "waive",
+    sentenceAfter: " any claim he had to the family fortune, preferring to see the money go to the younger generation.",
+    hint: "To willingly give up (as a claim, privilege, or right); do without.",
+    explanation: 'He chose to "waive" (willingly give up or relinquish) his legal claim to the inheritance.',
+  },
+  {
+    id: "ch22-sc1-6",
+    bucket: "Chapter 22",
+    itemNumber: 6,
+    sentenceBefore: "Dr. Grange is a brilliant mathematician, but she lacks ",
+    targetWord: "empathy",
+    sentenceAfter: " for her students. She doesn't understand how they can find some problems so difficult.",
+    hint: "The ability to share in someone else's feelings or thoughts.",
+    explanation: 'Unable to put herself in her struggling students\' shoes, she lacks "empathy".',
+  },
+  {
+    id: "ch22-sc1-7",
+    bucket: "Chapter 22",
+    itemNumber: 7,
+    sentenceBefore: "I had hoped the restaurant would be good, but our group's ",
+    targetWord: "consensus",
+    sentenceAfter: " was that the food was only so-so, and the service was even worse.",
+    hint: "An opinion held by everyone (or almost everyone) involved.",
+    explanation: 'The group\'s shared opinion or general agreement is a "consensus".',
+  },
+  {
+    id: "ch22-sc1-8",
+    bucket: "Chapter 22",
+    itemNumber: 8,
+    sentenceBefore: "Arnie has been ",
+    targetWord: "diligent",
+    sentenceAfter: " in his study of German because he hopes to speak the language with his relatives from Germany when they visit next summer.",
+    hint: "Steady, determined, and careful in work.",
+    explanation: 'Studying steadily and carefully shows that Arnie is "diligent" (hard-working).',
+  },
+  {
+    id: "ch22-sc1-9",
+    bucket: "Chapter 22",
+    itemNumber: 9,
+    sentenceBefore: "The children like to help out at the family restaurant, but they are able to perform only ",
+    targetWord: "menial",
+    sentenceAfter: " tasks, such as mopping floors and cleaning tables.",
+    hint: "Not requiring special skills or higher intellectual abilities.",
+    explanation: 'Mopping floors and wiping tables are "menial" (basic, unskilled) tasks.',
+  },
+  {
+    id: "ch22-sc1-10",
+    bucket: "Chapter 22",
+    itemNumber: 10,
+    sentenceBefore: "Several sessions with a career counselor helped Suzanne consider what her ",
+    targetWord: "niche",
+    sentenceAfter: " in the working world might be.",
+    hint: "An activity or situation especially suited to a person.",
+    explanation: 'Career counseling helped her find her "niche" (the role or profession best suited to her).',
+  },
+];
+
 export const SENTENCE_CHECKS_1: Record<string, SentenceCheck1Item[]> = {
   "Chapter 1": CHAPTER_1_CHECK_1,
   "Chapter 2": CHAPTER_2_CHECK_1,
@@ -858,6 +961,7 @@ export const SENTENCE_CHECKS_1: Record<string, SentenceCheck1Item[]> = {
   "Chapter 19": CHAPTER_19_CHECK_1,
   "Chapter 20": CHAPTER_20_CHECK_1,
   "Chapter 21": CHAPTER_21_CHECK_1,
+  "Chapter 22": CHAPTER_22_CHECK_1,
   "Chapter 6": CHAPTER_20_CHECK_1, // Backward compatibility alias
   "Set 1": CHAPTER_4_CHECK_1, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_1, // Backward compatibility alias
@@ -1448,6 +1552,79 @@ const CHAPTER_21_CHECK_2: SentenceCheck2Item[] = [
   },
 ];
 
+const CHAPTER_22_CHECK_2: SentenceCheck2Item[] = [
+  {
+    id: "ch22-sc2-1",
+    bucket: "Chapter 22",
+    itemNumber: 1,
+    targetWords: ["niche", "transcend"],
+    part1: "My mother could have stayed in her comfortable ",
+    part2: " as part of the secretarial pool, but she was averse to remaining there. She wanted to ",
+    part3: " the limits of that job and become an executive herself.",
+    hints: [
+      "An activity or situation especially suited to a person.",
+      "To rise above or go beyond the limits of; exceed.",
+    ],
+    explanation: 'She refused to stay in her comfortable "niche" and worked to "transcend" (go beyond) the limits of that position.',
+  },
+  {
+    id: "ch22-sc2-2",
+    bucket: "Chapter 22",
+    itemNumber: 2,
+    targetWords: ["consensus", "empathy"],
+    part1: 'In high school, Julio was voted "Most Likely to Become a Psychologist." It was the ',
+    part2: " of his classmates that he was the student endowed with the most ",
+    part3: " for other people.",
+    hints: [
+      "An opinion held by everyone (or almost everyone) involved.",
+      "The ability to share in someone else's feelings or thoughts.",
+    ],
+    explanation: 'The general "consensus" (agreement) among classmates was that Julio had the deepest "empathy" for others.',
+  },
+  {
+    id: "ch22-sc2-3",
+    bucket: "Chapter 22",
+    itemNumber: 3,
+    targetWords: ["waive", "deplete"],
+    part1: "Lynn begged the bank to ",
+    part2: " the overdraft charge of thirty dollars, telling them that it would entirely ",
+    part3: " her savings.",
+    hints: [
+      "To willingly give up (as a claim, privilege, or right); do without.",
+      "To use up.",
+    ],
+    explanation: 'She asked the bank to "waive" (drop/give up) the fee because paying it would "deplete" (use up) her savings.',
+  },
+  {
+    id: "ch22-sc2-4",
+    bucket: "Chapter 22",
+    itemNumber: 4,
+    targetWords: ["diligent", "complacent"],
+    part1: "Dr. Roberts and Dr. Krill practice medicine very differently. Dr. Roberts is ",
+    part2: " about reading journals and learning new techniques. Conversely, Dr. Krill is more ",
+    part3: " and never tries anything new.",
+    hints: [
+      "Steady, determined, and careful in work.",
+      "Self-satisfied; feeling too much satisfaction with oneself or one's accomplishments.",
+    ],
+    explanation: 'Dr. Roberts is "diligent" (hard-working and dedicated), whereas Dr. Krill is "complacent" (self-satisfied and unmotivated).',
+  },
+  {
+    id: "ch22-sc2-5",
+    bucket: "Chapter 22",
+    itemNumber: 5,
+    targetWords: ["commemorate", "menial"],
+    part1: '"On this, our hundredth anniversary celebration," said the company president, "I\'d like to ',
+    part2: " our founder with a toast. He ran the company from top to bottom, doing even such ",
+    part3: ' jobs as emptying garbage cans. He truly exemplified the values of dedication and hard work."',
+    hints: [
+      "To honor the memory of someone or something, as with a ceremony; celebrate; observe.",
+      "Not requiring special skills or higher intellectual abilities.",
+    ],
+    explanation: 'The president raised a toast to "commemorate" (honor) the founder, who wasn\'t above doing "menial" (humble, unskilled) chores.',
+  },
+];
+
 export const SENTENCE_CHECKS_2: Record<string, SentenceCheck2Item[]> = {
   "Chapter 1": CHAPTER_1_CHECK_2,
   "Chapter 2": CHAPTER_2_CHECK_2,
@@ -1457,6 +1634,7 @@ export const SENTENCE_CHECKS_2: Record<string, SentenceCheck2Item[]> = {
   "Chapter 19": CHAPTER_19_CHECK_2,
   "Chapter 20": CHAPTER_20_CHECK_2,
   "Chapter 21": CHAPTER_21_CHECK_2,
+  "Chapter 22": CHAPTER_22_CHECK_2,
   "Chapter 6": CHAPTER_20_CHECK_2, // Backward compatibility alias
   "Set 1": CHAPTER_4_CHECK_2, // Backward compatibility alias
   "Set 2": CHAPTER_5_CHECK_2, // Backward compatibility alias
